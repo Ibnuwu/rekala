@@ -128,23 +128,23 @@ export default async function HomePage() {
               </span>
             </div>
 
-            {/* 3 Simple Horizontal Steps */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-sans text-[var(--text-primary)]">
+            {/* 3 Simple Horizontal Steps - Single row on desktop, stack neatly on mobile */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-sm font-sans text-[var(--text-primary)]">
               <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold">1</span>
-                <span className="font-medium">Temukan QR</span>
+                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">1</span>
+                <span className="font-medium whitespace-nowrap">Temukan QR</span>
               </div>
-              <span className="text-[var(--text-muted)] hidden sm:inline">&bull;</span>
+              <span className="text-[var(--text-muted)] hidden sm:inline select-none">&bull;</span>
 
               <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold">2</span>
-                <span className="font-medium">Pindai</span>
+                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">2</span>
+                <span className="font-medium whitespace-nowrap">Pindai QR</span>
               </div>
-              <span className="text-[var(--text-muted)] hidden sm:inline">&bull;</span>
+              <span className="text-[var(--text-muted)] hidden sm:inline select-none">&bull;</span>
 
               <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold">3</span>
-                <span className="font-medium">Baca Sejarah</span>
+                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">3</span>
+                <span className="font-medium whitespace-nowrap">Telusuri Arsip</span>
               </div>
             </div>
 
