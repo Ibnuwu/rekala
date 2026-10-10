@@ -1,1 +1,379 @@
 @import "tailwindcss";
+
+/*
+ * REKALA Design System — Minimalist Modern Heritage (Dark & Light Mode)
+ *
+ * Dark Mode: Deep obsidian (#0F0F11), warm gold/bronze (#D4AF37), soft ivory (#E6DFD3)
+ * Light Mode: Clean warm off-white (#F8F7F4), charcoal (#1A1A1E), dark bronze (#8C6D23)
+ */
+
+:root {
+  /* ── Dark Mode Default Variables ── */
+  --bg-primary: #0F0F11;
+  --bg-surface: #1A1A1E;
+  --bg-surface-elevated: #24242A;
+  --bg-surface-subtle: #141418;
+  --bg-overlay: rgba(15, 15, 17, 0.92);
+  --header-bg: rgba(15, 15, 17, 0.88);
+  --footer-bg: #0D0D0F;
+
+  --text-primary: #E6DFD3;
+  --text-secondary: #9E9E9E;
+  --text-muted: #71717A;
+  --text-title: #FFFFFF;
+
+  --accent-gold: #D4AF37;
+  --accent-gold-hover: #E5C158;
+  --accent-gold-border: rgba(212, 175, 55, 0.35);
+  --accent-gold-bg: rgba(212, 175, 55, 0.08);
+  --accent-gold-glow: rgba(212, 175, 55, 0.25);
+  --accent-gold-text-on: #0F0F11;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.15);
+
+  --card-bg: #1A1A1E;
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-hover-border: rgba(212, 175, 55, 0.45);
+  --card-hover-bg: #202026;
+
+  --image-placeholder-bg: #121215;
+  --image-placeholder-vignette: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(15,15,17,0.85) 100%);
+
+  /* Adaptive Logo variables */
+  --logo-stamp-bg: #16161A;
+  --logo-stamp-border: #2B2B33;
+  --logo-stamp-text: #D4AF37;
+  --logo-brand-text: #E6DFD3;
+
+  /* Font families */
+  --font-serif: 'Playfair Display', 'Cinzel', 'Georgia', serif;
+  --font-cinzel: 'Cinzel', serif;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ── Light Mode Overrides ── */
+html.light, [data-theme="light"] {
+  --bg-primary: #F8F7F4;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #EFECE6;
+  --bg-surface-subtle: #E8E4DA;
+  --bg-overlay: rgba(248, 247, 244, 0.94);
+  --header-bg: rgba(248, 247, 244, 0.90);
+  --footer-bg: #ECE8E0;
+
+  --text-primary: #1A1A1E;
+  --text-secondary: #5E5B55;
+  --text-muted: #7E7B74;
+  --text-title: #141416;
+
+  --accent-gold: #8C6D23;
+  --accent-gold-hover: #73581B;
+  --accent-gold-border: rgba(140, 109, 35, 0.35);
+  --accent-gold-bg: rgba(140, 109, 35, 0.08);
+  --accent-gold-glow: rgba(140, 109, 35, 0.2);
+  --accent-gold-text-on: #FFFFFF;
+
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-medium: rgba(0, 0, 0, 0.16);
+
+  --card-bg: #FFFFFF;
+  --card-border: rgba(0, 0, 0, 0.08);
+  --card-hover-border: rgba(140, 109, 35, 0.5);
+  --card-hover-bg: #FAF9F6;
+
+  --image-placeholder-bg: #E4E0D6;
+  --image-placeholder-vignette: linear-gradient(180deg, rgba(248,247,244,0.05) 0%, rgba(26,26,30,0.75) 100%);
+
+  /* Adaptive Logo variables in Light Mode */
+  --logo-stamp-bg: #EAE5DA;
+  --logo-stamp-border: #D3CCBE;
+  --logo-stamp-text: #8C6D23;
+  --logo-brand-text: #1A1A1E;
+}
+
+@theme {
+  --color-obsidian: var(--bg-primary);
+  --color-slate-surface: var(--bg-surface);
+  --color-slate-elevated: var(--bg-surface-elevated);
+  --color-gold: var(--accent-gold);
+  --color-gold-muted: var(--accent-gold-hover);
+  --color-ivory: var(--text-primary);
+  --color-silver: var(--text-secondary);
+  --color-border-subtle: var(--border-subtle);
+
+  --font-serif: var(--font-serif);
+  --font-cinzel: var(--font-cinzel);
+  --font-sans: var(--font-sans);
+}
+
+/* ── Base styles ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+  line-height: 1.7;
+  min-height: 100dvh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--text-title);
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 6vw, 4.25rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+/* ── Skip Link ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 100;
+  padding: 10px 20px;
+  background: var(--accent-gold);
+  color: var(--accent-gold-text-on);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ── Container ── */
+.container-editorial {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media (min-width: 768px) {
+  .container-editorial {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-editorial {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+/* ── Section padding ── */
+.section-padding {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+}
+
+/* ── Minimalist Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 11px 22px;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.btn-gold {
+  background: var(--accent-gold);
+  color: var(--accent-gold-text-on);
+  border: 1px solid var(--accent-gold-border);
+  box-shadow: 0 4px 14px var(--accent-gold-glow);
+}
+
+.btn-gold:hover {
+  background: var(--accent-gold-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--accent-gold-glow);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+}
+
+.btn-ghost:hover {
+  background: var(--accent-gold-bg);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+@media (max-width: 480px) {
+  .btn-stack-mobile {
+    width: 100%;
+  }
+}
+
+/* ── Archive Image & Card Treatment ── */
+.archive-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.archive-card:hover {
+  border-color: var(--card-hover-border);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.archive-placeholder-frame {
+  background-color: var(--image-placeholder-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.archive-image {
+  filter: contrast(1.03) brightness(0.97);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+}
+
+.archive-card:hover .archive-image {
+  transform: scale(1.03);
+  filter: contrast(1.06) brightness(1.02);
+}
+
+/* ── Glass & Pill Badges ── */
+.badge-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent-gold);
+  background: var(--accent-gold-bg);
+  border: 1px solid var(--accent-gold-border);
+  border-radius: 9999px;
+}
+
+.badge-zinc {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 9999px;
+}
+
+/* ── Adaptive Brand Logo ── */
+.brand-logo-stamp {
+  background-color: var(--logo-stamp-bg);
+  border: 1px solid var(--logo-stamp-border);
+  color: var(--logo-stamp-text);
+  transition: all 0.3s ease;
+}
+
+.brand-logo-text {
+  color: var(--logo-brand-text);
+  letter-spacing: 0.18em;
+  transition: color 0.3s ease;
+}
+
+/* ── Footer Logo Adaptive Filter ── */
+.footer-logo-adaptive {
+  filter: brightness(0.95) contrast(0.9);
+  transition: filter 0.3s ease;
+}
+
+html.light .footer-logo-adaptive,
+[data-theme="light"] .footer-logo-adaptive {
+  filter: brightness(1.05) contrast(1.1);
+}
+
+/* ── Subtle Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-surface-elevated);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}
