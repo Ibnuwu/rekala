@@ -8,6 +8,20 @@ export function Footer() {
       <div className="container-editorial max-w-4xl flex flex-col items-center">
         {/* Direct Horizontal Logo Row without Boxes */}
         <div className="flex items-center justify-center gap-6 sm:gap-8 flex-wrap">
+          {/* REKALA Brand Logo */}
+          <div
+            className="flex items-center justify-center opacity-85 hover:opacity-100 transition-all duration-300 hover:scale-105"
+            title="REKALA"
+          >
+            <Image
+              src="/logo/logo-warna.png"
+              alt="Logo REKALA"
+              width={120}
+              height={32}
+              className="h-7 sm:h-8 w-auto object-contain"
+            />
+          </div>
+
           {/* 1. Provinsi Banten */}
           <div
             className="flex items-center justify-center opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
@@ -51,26 +65,8 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Dual-Theme REKALA Brand Logo Centered */}
-        <div className="mt-8 mb-3 flex items-center justify-center">
-          <Image
-            src="/logo/logo-dark.png"
-            alt="REKALA Logo"
-            width={38}
-            height={38}
-            className="block dark:hidden object-contain"
-          />
-          <Image
-            src="/logo/logo-light.png"
-            alt="REKALA Logo"
-            width={38}
-            height={38}
-            className="hidden dark:block object-contain"
-          />
-        </div>
-
         {/* Centered Footer Text Directly Below Logos */}
-        <p className="font-sans text-xs text-[var(--text-secondary)]">
+        <p className="mt-6 font-sans text-xs text-[var(--text-secondary)]">
           © 2026 REKALA - Proyek OJT BBPVP Serang × DPK Banten
         </p>
       </div>
