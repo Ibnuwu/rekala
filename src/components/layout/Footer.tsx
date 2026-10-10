@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 
 export function Footer() {
@@ -49,8 +51,26 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Dual-Theme REKALA Brand Logo Centered */}
+        <div className="mt-8 mb-3 flex items-center justify-center">
+          <Image
+            src="/logo/logo-dark.png"
+            alt="REKALA Logo"
+            width={38}
+            height={38}
+            className="block dark:hidden object-contain"
+          />
+          <Image
+            src="/logo/logo-light.png"
+            alt="REKALA Logo"
+            width={38}
+            height={38}
+            className="hidden dark:block object-contain"
+          />
+        </div>
+
         {/* Centered Footer Text Directly Below Logos */}
-        <p className="mt-6 font-sans text-xs text-[var(--text-secondary)]">
+        <p className="font-sans text-xs text-[var(--text-secondary)]">
           © 2026 REKALA - Proyek OJT BBPVP Serang × DPK Banten
         </p>
       </div>

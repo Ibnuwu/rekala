@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 const NAV_ITEMS = [
@@ -137,16 +138,24 @@ export function MobileMenu() {
           <Link
             href="/"
             onClick={closeMenu}
-            className="flex items-center gap-2.5 cursor-pointer"
+            className="flex items-center gap-2 cursor-pointer"
             aria-label="REKALA — Beranda"
           >
-            <div className="w-8 h-8 rounded-lg brand-logo-stamp flex items-center justify-center">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <path d="M7 7h10M7 12h7M7 17h10" />
-              </svg>
-            </div>
-            <span className="font-serif text-lg font-bold tracking-[0.18em] brand-logo-text leading-none">
+            <Image
+              src="/logo/logo-dark.png"
+              alt="REKALA Logo"
+              width={28}
+              height={28}
+              className="block dark:hidden object-contain"
+            />
+            <Image
+              src="/logo/logo-light.png"
+              alt="REKALA Logo"
+              width={28}
+              height={28}
+              className="hidden dark:block object-contain"
+            />
+            <span className="font-serif font-bold text-lg tracking-wider brand-logo-text leading-none">
               REKALA
             </span>
           </Link>

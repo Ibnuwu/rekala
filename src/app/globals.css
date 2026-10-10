@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, [data-theme="dark"], .dark *, [data-theme="dark"] *));
+
 /*
  * REKALA Design System — Minimalist Modern Heritage (Dark & Light Mode)
  *

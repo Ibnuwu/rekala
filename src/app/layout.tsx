@@ -9,28 +9,22 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: {
-    default: 'REKALA — Layanan Arsip Digital | OJT BBPVP Serang × DPK Banten',
-    template: '%s | REKALA',
-  },
-  description:
-    'Layanan arsip digital foto sejarah Provinsi Banten dengan kurasi modern dan akses interaktif kode QR.',
+  title: 'REKALA — Layanan Arsip Digital Banten',
+  description: 'Eksplorasi visual dan kisah sejarah Banten melalui koleksi arsip otentik.',
   openGraph: {
-    type: 'website',
-    locale: 'id_ID',
-    siteName: 'REKALA',
-    title: 'REKALA — Layanan Arsip Digital | OJT BBPVP Serang × DPK Banten',
-    description:
-      'Eksplorasi koleksi foto arsip sejarah Banten secara digital dan interaktif melalui kurasi Naskah Arsip Banten.',
+    title: 'REKALA — Layanan Arsip Digital Banten',
+    description: 'Eksplorasi visual dan kisah sejarah Banten melalui koleksi arsip otentik.',
+    images: [
+      {
+        url: '/archives/Arsip-01.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'REKALA - Layanan Arsip Digital Banten',
+      },
+    ],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'REKALA — Layanan Arsip Digital | OJT BBPVP Serang × DPK Banten',
-    description:
-      'Layanan arsip digital foto sejarah Provinsi Banten.',
-  },
-  alternates: {
-    canonical: '/',
+  icons: {
+    icon: '/logo/logo-dark.png',
   },
 };
 
