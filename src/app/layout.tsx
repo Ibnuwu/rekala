@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: '/logo/logo-dark.png',
+    icon: '/logo/logo-light.png',
   },
 };
 
@@ -36,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="id" className="dark scroll-smooth" suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/logo/logo-light.png" type="image/png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}

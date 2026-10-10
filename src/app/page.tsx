@@ -77,15 +77,19 @@ export default async function HomePage() {
 
             {/* Right: Archival Hero Visual Frame */}
             <div className="lg:col-span-6 relative">
-              <div className="relative rounded-xl overflow-hidden border border-[var(--border-subtle)] shadow-2xl bg-[var(--bg-surface)] archive-placeholder-frame">
+              <Link
+                href="/arsip/Arsip-05"
+                className="group block relative rounded-xl overflow-hidden border border-[var(--border-subtle)] shadow-2xl bg-[var(--bg-surface)] archive-placeholder-frame hover:border-[var(--accent-gold)]/50 transition-all duration-500"
+                aria-label="Lihat detail arsip Benteng Speelwijk (Tahun 1920)"
+              >
                 <div className="aspect-[4/3] relative">
                   <Image
-                    src="/archives/Arsip-07.jpg"
-                    alt="Dokumentasi arsip sejarah Provinsi Banten — Benteng Speelwijk"
+                    src="/archives/Arsip-05.jpg"
+                    alt="Dokumentasi arsip sejarah Provinsi Banten — Benteng Speelwijk (Tampak 2 Buah Meriam), Tahun 1920"
                     width={1024}
                     height={768}
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover object-center w-full h-full opacity-95 hover:scale-[1.03] transition-transform duration-700 archive-image"
+                    className="object-cover object-center w-full h-full opacity-95 group-hover:scale-[1.03] transition-transform duration-700 archive-image"
                     priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
@@ -94,20 +98,20 @@ export default async function HomePage() {
                 <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 flex items-end justify-between gap-4">
                   <div className="space-y-1">
                     <span className="text-[0.625rem] font-mono text-[var(--accent-gold)] uppercase tracking-widest block">
-                      Dokumen Pilihan
+                      Dokumen Pilihan &bull; Arsip-05
                     </span>
-                    <p className="font-serif text-lg text-white font-medium">
-                      Benteng Speelwijk (Nampak 2 Buah Meriam)
+                    <p className="font-serif text-lg text-white font-medium group-hover:text-[var(--accent-gold)] transition-colors">
+                      Benteng Speelwijk (Tampak 2 Buah Meriam)
                     </p>
                     <p className="text-xs text-zinc-300 font-sans">
-                      Naskah Arsip Banten
+                      Banten Lama &bull; Kemendikbudristek
                     </p>
                   </div>
                   <span className="px-2.5 py-1 rounded text-[0.625rem] font-mono text-zinc-200 bg-black/80 backdrop-blur-md border border-white/20 shrink-0">
                     Tahun 1920
                   </span>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
