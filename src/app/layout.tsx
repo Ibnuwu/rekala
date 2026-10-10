@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -64,6 +65,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-w-0 bg-[var(--bg-primary)] text-[var(--text-primary)] selection:bg-[var(--accent-gold)]/30 selection:text-white antialiased transition-colors duration-300">
+        <Analytics />
         <ThemeProvider>
           <a href="#main-content" className="skip-link">
             Langsung ke konten
