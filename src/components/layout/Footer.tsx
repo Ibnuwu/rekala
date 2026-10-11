@@ -4,13 +4,13 @@ import Image from 'next/image';
 
 export function Footer() {
   return (
-    <footer className="bg-transparent border-t border-[var(--border-subtle)] py-10 sm:py-12 text-xs text-[var(--text-secondary)] text-center transition-colors duration-300">
+    <footer className="bg-transparent border-t border-zinc-800/80 py-8 px-4 text-xs text-[var(--text-secondary)] text-center transition-colors duration-300">
       <div className="container-editorial max-w-4xl flex flex-col items-center">
-        {/* Direct Horizontal Logo Row without Boxes */}
-        <div className="flex items-center justify-center gap-6 sm:gap-8 flex-wrap">
+        {/* Horizontal Logo Row — All 4 logos in a single row */}
+        <div className="flex items-center justify-center gap-6 flex-nowrap">
           {/* REKALA Brand Logo */}
           <div
-            className="flex items-center justify-center opacity-85 hover:opacity-100 transition-all duration-300 hover:scale-105"
+            className="flex items-center justify-center opacity-85 hover:opacity-100 transition-all duration-300 hover:scale-105 shrink-0"
             title="REKALA"
           >
             <Image
@@ -22,9 +22,9 @@ export function Footer() {
             />
           </div>
 
-          {/* 1. Provinsi Banten */}
+          {/* Provinsi Banten */}
           <div
-            className="flex items-center justify-center opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
+            className="flex items-center justify-center opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105 shrink-0"
             title="Pemerintah Provinsi Banten"
           >
             <Image
@@ -36,9 +36,9 @@ export function Footer() {
             />
           </div>
 
-          {/* 2. Kemnaker RI */}
+          {/* Kemnaker RI */}
           <div
-            className="flex items-center justify-center opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
+            className="flex items-center justify-center opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105 shrink-0"
             title="Kementerian Ketenagakerjaan RI"
           >
             <Image
@@ -50,9 +50,9 @@ export function Footer() {
             />
           </div>
 
-          {/* 3. Perpusda / DPK Banten */}
+          {/* Perpusda / DPK Banten */}
           <div
-            className="flex items-center justify-center opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
+            className="flex items-center justify-center opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105 shrink-0"
             title="Dinas Perpustakaan dan Kearsipan Provinsi Banten"
           >
             <Image
@@ -65,9 +65,9 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Centered Footer Text Directly Below Logos */}
+        {/* Copyright Line */}
         <p className="mt-6 font-sans text-xs text-[var(--text-secondary)]">
-          © 2026 REKALA - Proyek OJT BBPVP Serang × DPK Banten
+          © 2026 REKALA — Proyek OJT BBPVP Serang × DPK Banten
         </p>
       </div>
     </footer>

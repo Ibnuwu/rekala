@@ -13,12 +13,6 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const ketua = TEAM_MEMBERS.find((m) => m.roleCategory === 'Ketua');
-  const developer = TEAM_MEMBERS.find((m) => m.roleCategory === 'Developer');
-  const script = TEAM_MEMBERS.find((m) => m.roleCategory === 'Penulis Script');
-  const observasiList = TEAM_MEMBERS.filter((m) => m.roleCategory === 'Observasi / Sources');
-  const dokumentasiList = TEAM_MEMBERS.filter((m) => m.roleCategory === 'Dokumentasi');
-
   return (
     <div className="bg-[var(--bg-primary)] text-[var(--text-primary)] min-h-screen py-12 lg:py-20 transition-colors duration-300">
       <div className="container-editorial">
@@ -104,8 +98,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Struktur Tim REKALA — Modern Minimalist Profile Cards (2-Column Grid) */}
-        <section className="my-16 lg:my-24 space-y-10">
+        {/* Struktur Tim REKALA — Compact Grid Layout */}
+        <section className="my-16 lg:my-24 space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]">
             <div>
               <span className="badge-gold mb-2">Kolaborator</span>
@@ -116,51 +110,11 @@ export default function AboutPage() {
             </span>
           </div>
 
-          <div className="space-y-8">
-            {/* Group 1: Ketua & Developer */}
-            <div className="space-y-3">
-              <span className="text-[0.6875rem] font-mono uppercase tracking-[0.18em] text-[var(--accent-gold)] font-medium block">
-                Ketua &amp; Pengembang
-              </span>
-              <div className="grid grid-cols-2 gap-3.5 sm:gap-6">
-                {ketua && <TeamMemberCard member={ketua} />}
-                {developer && <TeamMemberCard member={developer} />}
-              </div>
-            </div>
-
-            {/* Group 2: Penulis Script */}
-            <div className="space-y-3">
-              <span className="text-[0.6875rem] font-mono uppercase tracking-[0.18em] text-[var(--accent-gold)] font-medium block">
-                Penulis Script
-              </span>
-              <div className="grid grid-cols-2 gap-3.5 sm:gap-6">
-                {script && <TeamMemberCard member={script} />}
-              </div>
-            </div>
-
-            {/* Group 3: Observasi / Pencari Sumber (2-column grid) */}
-            <div className="space-y-3">
-              <span className="text-[0.6875rem] font-mono uppercase tracking-[0.18em] text-[var(--accent-gold)] font-medium block">
-                Observasi / Pencari Sumber
-              </span>
-              <div className="grid grid-cols-2 gap-3.5 sm:gap-6">
-                {observasiList.map((m) => (
-                  <TeamMemberCard key={m.id} member={m} />
-                ))}
-              </div>
-            </div>
-
-            {/* Group 4: Dokumentasi (2-column grid) */}
-            <div className="space-y-3">
-              <span className="text-[0.6875rem] font-mono uppercase tracking-[0.18em] text-[var(--accent-gold)] font-medium block">
-                Dokumentasi
-              </span>
-              <div className="grid grid-cols-2 gap-3.5 sm:gap-6">
-                {dokumentasiList.map((m) => (
-                  <TeamMemberCard key={m.id} member={m} />
-                ))}
-              </div>
-            </div>
+          {/* Compact grid: 2 cols mobile, 3 cols sm, 4 cols md+ */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {TEAM_MEMBERS.map((member) => (
+              <TeamMemberCard key={member.id} member={member} />
+            ))}
           </div>
         </section>
       </div>

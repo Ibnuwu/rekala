@@ -117,10 +117,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── "Cara Kerja" Section (3 simple horizontal steps) ── */}
+      {/* ── "Cara Kerja" Section — Always horizontal 3-column row ── */}
       <section className="py-8 bg-[var(--bg-surface-elevated)] border-b border-[var(--border-subtle)]">
         <div className="container-editorial">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
             <div className="flex items-center gap-2.5 shrink-0">
               <span className="w-2 h-2 rounded-full bg-[var(--accent-gold)]" />
               <span className="text-xs font-mono uppercase tracking-[0.16em] text-[var(--accent-gold)] font-semibold">
@@ -128,23 +128,21 @@ export default async function HomePage() {
               </span>
             </div>
 
-            {/* 3 Simple Horizontal Steps - Single row on desktop, stack neatly on mobile */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-sm font-sans text-[var(--text-primary)]">
-              <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">1</span>
-                <span className="font-medium whitespace-nowrap">Temukan QR</span>
+            {/* 3 Steps — Always horizontal in a single row, compact on mobile */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 flex-1 max-w-md lg:max-w-lg">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[0.625rem] sm:text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">1</span>
+                <span className="text-xs sm:text-sm font-medium text-[var(--text-primary)] whitespace-nowrap">Temukan QR</span>
               </div>
-              <span className="text-[var(--text-muted)] hidden sm:inline select-none">&bull;</span>
 
-              <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">2</span>
-                <span className="font-medium whitespace-nowrap">Pindai QR</span>
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[0.625rem] sm:text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">2</span>
+                <span className="text-xs sm:text-sm font-medium text-[var(--text-primary)] whitespace-nowrap">Pindai</span>
               </div>
-              <span className="text-[var(--text-muted)] hidden sm:inline select-none">&bull;</span>
 
-              <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">3</span>
-                <span className="font-medium whitespace-nowrap">Telusuri Arsip</span>
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[0.625rem] sm:text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">3</span>
+                <span className="text-xs sm:text-sm font-medium text-[var(--text-primary)] whitespace-nowrap">Telusuri Arsip</span>
               </div>
             </div>
 
@@ -215,7 +213,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── Koleksi Sorotan ── */}
-      <section className="py-16 lg:py-24 bg-[var(--bg-surface-subtle)]">
+      <section className="py-16 lg:py-24 bg-[var(--bg-surface-subtle)] border-b border-[var(--border-subtle)]">
         <div className="container-editorial">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
             <div>
@@ -243,25 +241,44 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Closing Ambient CTA ── */}
-      <section className="py-20 bg-[var(--bg-primary)] border-t border-[var(--border-subtle)]">
-        <div className="container-editorial text-center max-w-2xl space-y-6">
-          <span className="badge-gold">
-            Eksplorasi Arsip
-          </span>
-          <h2 className="font-serif text-3xl sm:text-4xl text-[var(--text-title)] font-normal">
-            Pindai &amp; Pelajari Sejarah Banten
-          </h2>
-          <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-            Dapatkan informasi mendalam dengan memindai kode QR pada setiap bingkai foto arsip digital Banten.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-            <Link href="/scan" className="btn btn-gold w-full sm:w-auto">
-              Buka Pemindai QR
-            </Link>
-            <Link href="/galeri" className="btn btn-ghost w-full sm:w-auto">
-              Telusuri Galeri
-            </Link>
+      {/* ── Tentang REKALA Teaser ── */}
+      <section className="py-16 lg:py-20 bg-[var(--bg-primary)]">
+        <div className="container-editorial max-w-3xl">
+          <div className="relative p-6 sm:p-10 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm overflow-hidden">
+            {/* Subtle ambient glow */}
+            <div className="absolute -top-20 -right-20 w-60 h-60 bg-[var(--accent-gold)]/5 blur-[80px] rounded-full pointer-events-none" />
+
+            <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+              {/* REKALA Logo */}
+              <div className="shrink-0">
+                <Image
+                  src="/logo/logo-warna.png"
+                  alt="Logo REKALA"
+                  width={80}
+                  height={80}
+                  className="h-14 sm:h-16 w-auto object-contain"
+                />
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 space-y-3">
+                <h2 className="font-serif text-xl sm:text-2xl text-[var(--text-title)] font-normal">
+                  Tentang REKALA
+                </h2>
+                <p className="text-sm text-[var(--text-secondary)] leading-relaxed font-sans font-light">
+                  REKALA (Reka Kala) — Merangkai jejak waktu, menghidupkan kembali kisah sejarah Banten.
+                </p>
+                <Link
+                  href="/about"
+                  className="btn btn-ghost inline-flex !px-5 !py-2 !min-h-0 !text-xs"
+                >
+                  Selengkapnya
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M6 3l5 5-5 5" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
