@@ -129,7 +129,7 @@ export function MobileMenu() {
       <>
         {/* Backdrop overlay */}
         <div
-          className="fixed inset-0 z-[99998] bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-[99998] bg-black/40 dark:bg-black/75 backdrop-blur-sm transition-opacity duration-200"
           onClick={closeMenu}
           aria-hidden="true"
           style={{
@@ -142,12 +142,8 @@ export function MobileMenu() {
           role="dialog"
           aria-modal="true"
           aria-label="Menu Navigasi Mobile"
-          className="fixed inset-y-0 right-0 z-[99999] w-[min(320px,85vw)] flex flex-col overflow-hidden"
+          className="fixed inset-y-0 right-0 z-[99999] w-[min(320px,85vw)] flex flex-col overflow-hidden bg-stone-50/95 dark:bg-zinc-950/95 backdrop-blur-md border-l border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-2xl transition-colors duration-200"
           style={{
-            background: 'rgba(9, 9, 11, 0.92)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            borderLeft: '1px solid rgba(255, 255, 255, 0.06)',
             animation: 'mobile-drawer-slide-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards',
           }}
         >
@@ -156,17 +152,24 @@ export function MobileMenu() {
             <Link
               href="/"
               onClick={closeMenu}
-              className="flex items-center gap-2.5 cursor-pointer"
+              className="flex items-center gap-2.5 cursor-pointer focus:outline-none"
               aria-label="REKALA — Beranda"
             >
+              <Image
+                src="/logo/logo-dark.png"
+                alt="REKALA Logo"
+                width={24}
+                height={24}
+                className="object-contain block dark:hidden"
+              />
               <Image
                 src="/logo/logo-light.png"
                 alt="REKALA Logo"
                 width={24}
                 height={24}
-                className="object-contain"
+                className="object-contain hidden dark:block"
               />
-              <span className="font-serif font-bold text-base tracking-[0.2em] text-zinc-100 leading-none">
+              <span className="font-serif font-bold text-base tracking-[0.2em] text-zinc-900 dark:text-zinc-100 leading-none">
                 REKALA
               </span>
             </Link>
@@ -174,7 +177,7 @@ export function MobileMenu() {
             <button
               type="button"
               onClick={closeMenu}
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-zinc-500 hover:text-zinc-200 active:scale-95 transition-all cursor-pointer touch-manipulation"
+              className="w-8 h-8 rounded-lg flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-200/60 dark:hover:bg-zinc-900/60 active:scale-95 transition-all cursor-pointer touch-manipulation focus:outline-none"
               aria-label="Tutup menu"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
@@ -185,11 +188,11 @@ export function MobileMenu() {
           </div>
 
           {/* Separator */}
-          <div className="mx-5 h-px bg-zinc-800/60" />
+          <div className="mx-5 h-px bg-zinc-200/80 dark:bg-zinc-800/80" />
 
           {/* Navigation links */}
           <nav className="flex-1 overflow-y-auto px-4 py-5 overscroll-contain" aria-label="Menu Mobile">
-            <div className="space-y-0.5">
+            <div className="space-y-1">
               {NAV_ITEMS.map((item) => {
                 const isActive = pathname === item.href;
 
@@ -202,10 +205,10 @@ export function MobileMenu() {
                       group flex items-center gap-3.5 px-3 py-3 rounded-xl transition-all duration-150 cursor-pointer touch-manipulation min-h-[48px]
                       ${
                         item.isSpecial
-                          ? 'bg-[var(--accent-gold)]/10 text-[var(--accent-gold)]'
+                          ? 'bg-amber-500/10 dark:bg-amber-400/10 text-amber-800 dark:text-amber-300 border border-amber-500/30 dark:border-amber-400/30 font-medium'
                           : isActive
-                          ? 'bg-white/[0.06] text-zinc-100'
-                          : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04]'
+                          ? 'bg-zinc-200/80 dark:bg-white/[0.08] text-zinc-900 dark:text-zinc-100 font-semibold border border-zinc-300/60 dark:border-white/10'
+                          : 'text-zinc-700 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/50 dark:hover:bg-white/[0.04]'
                       }
                     `}
                     aria-current={isActive ? 'page' : undefined}
@@ -216,10 +219,10 @@ export function MobileMenu() {
                         w-8 h-8 rounded-lg flex items-center justify-center shrink-0
                         ${
                           item.isSpecial
-                            ? 'bg-[var(--accent-gold)] text-[var(--accent-gold-text-on)]'
+                            ? 'bg-amber-600 dark:bg-amber-400 text-white dark:text-zinc-950'
                             : isActive
-                            ? 'bg-white/10 text-[var(--accent-gold)]'
-                            : 'bg-white/[0.04] text-zinc-500 group-hover:text-zinc-300'
+                            ? 'bg-zinc-300/80 dark:bg-white/10 text-amber-700 dark:text-amber-400'
+                            : 'bg-zinc-200/60 dark:bg-white/[0.04] text-zinc-700 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-200'
                         }
                       `}
                     >
@@ -229,23 +232,23 @@ export function MobileMenu() {
                     {/* Label & Subtitle */}
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
-                        <span className={`text-[0.8125rem] tracking-[0.08em] leading-none font-medium ${item.isSpecial ? 'font-semibold' : ''}`}>
+                        <span className={`text-[0.8125rem] tracking-[0.08em] leading-none ${item.isSpecial || isActive ? 'font-semibold' : 'font-medium'}`}>
                           {item.label}
                         </span>
                         {item.isSpecial && (
-                          <span className="px-1.5 py-0.5 rounded text-[0.5rem] font-mono font-bold tracking-wider bg-[var(--accent-gold)] text-[var(--accent-gold-text-on)] uppercase leading-none">
+                          <span className="px-1.5 py-0.5 rounded text-[0.5rem] font-mono font-bold tracking-wider bg-amber-600 dark:bg-amber-400 text-white dark:text-zinc-950 uppercase leading-none">
                             SCAN
                           </span>
                         )}
                       </div>
-                      <p className="text-[0.6875rem] text-zinc-500 mt-0.5 leading-none font-sans">
+                      <p className="text-[0.6875rem] text-zinc-500 dark:text-zinc-500 mt-1 leading-none font-sans">
                         {item.subtitle}
                       </p>
                     </div>
 
                     {/* Active indicator dot */}
                     {isActive && (
-                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--accent-gold)] shrink-0" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-amber-600 dark:bg-amber-400 shrink-0" />
                     )}
                   </Link>
                 );
@@ -254,11 +257,11 @@ export function MobileMenu() {
           </nav>
 
           {/* Separator */}
-          <div className="mx-5 h-px bg-zinc-800/60" />
+          <div className="mx-5 h-px bg-zinc-200/80 dark:bg-zinc-800/80" />
 
           {/* Drawer Footer */}
           <div className="px-5 py-4 text-center shrink-0">
-            <p className="text-[0.625rem] text-zinc-600 font-sans tracking-wide">
+            <p className="text-[0.625rem] text-zinc-500 dark:text-zinc-500 font-sans tracking-wide">
               © 2026 REKALA — OJT BBPVP Serang × DPK Banten
             </p>
           </div>
