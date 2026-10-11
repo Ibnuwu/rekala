@@ -399,7 +399,7 @@ export function QRScanner({ sampleArchives }: QRScannerProps) {
         </div>
 
         {cameraError && (
-          <div className="p-4 bg-rose-950/30 border border-rose-800/50 text-rose-200 text-xs rounded-xl space-y-1">
+          <div className="p-4 bg-rose-100 dark:bg-rose-950/30 border border-rose-300 dark:border-rose-800/50 text-rose-800 dark:text-rose-200 text-xs rounded-xl space-y-1 transition-colors duration-200">
             <p className="font-semibold">Kendala Kamera:</p>
             <p>{cameraError}</p>
           </div>

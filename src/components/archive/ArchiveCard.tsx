@@ -95,9 +95,8 @@ export function ArchiveCard({ archive, priority = false, variant = 'default' }: 
             </p>
           )}
 
-          <h3 className={`font-serif font-medium leading-snug text-[var(--text-title)] group-hover:text-[var(--accent-gold)] transition-colors break-words ${
-            isFeatured ? 'text-xl sm:text-2xl' : 'text-base sm:text-lg'
-          }`}>
+          <h3 className={`font-serif font-medium leading-snug text-[var(--text-title)] group-hover:text-[var(--accent-gold)] transition-colors break-words ${isFeatured ? 'text-xl sm:text-2xl' : 'text-base sm:text-lg'
+            }`}>
             <Link href={`/arsip/${archive.id}`} className="focus:outline-none">
               {archive.title}
             </Link>

@@ -160,18 +160,11 @@ export function MobileMenu() {
               aria-label="REKALA — Beranda"
             >
               <Image
-                src="/logo/logo-dark.png"
-                alt="REKALA Logo"
-                width={24}
-                height={24}
-                className="block dark:hidden object-contain"
-              />
-              <Image
                 src="/logo/logo-light.png"
                 alt="REKALA Logo"
                 width={24}
                 height={24}
-                className="hidden dark:block object-contain"
+                className="object-contain"
               />
               <span className="font-serif font-bold text-base tracking-[0.2em] text-zinc-100 leading-none">
                 REKALA
@@ -245,7 +238,7 @@ export function MobileMenu() {
                           </span>
                         )}
                       </div>
-                      <p className="text-[0.6875rem] text-zinc-600 mt-0.5 leading-none font-sans">
+                      <p className="text-[0.6875rem] text-zinc-500 mt-0.5 leading-none font-sans">
                         {item.subtitle}
                       </p>
                     </div>

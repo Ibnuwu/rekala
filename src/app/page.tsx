@@ -117,37 +117,56 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── "Cara Kerja" Section — Always horizontal 3-column row ── */}
-      <section className="py-8 bg-[var(--bg-surface-elevated)] border-b border-[var(--border-subtle)]">
+      {/* ── Minimalist Workflow Steps Bar ── */}
+      <section className="py-4 sm:py-5 bg-[var(--bg-surface-elevated)] border-b border-[var(--border-subtle)] transition-colors duration-200">
         <div className="container-editorial">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
-            <div className="flex items-center gap-2.5 shrink-0">
-              <span className="w-2 h-2 rounded-full bg-[var(--accent-gold)]" />
-              <span className="text-xs font-mono uppercase tracking-[0.16em] text-[var(--accent-gold)] font-semibold">
-                Cara Kerja:
-              </span>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
+            {/* 3 Steps — Balanced, consistent spacing with subtle arrow dividers */}
+            <div className="flex items-center justify-center gap-2.5 sm:gap-6 w-full sm:w-auto flex-nowrap overflow-x-auto py-1 scrollbar-none">
+              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[0.625rem] font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">
+                  1
+                </span>
+                <span className="text-xs sm:text-sm font-medium text-[var(--text-primary)] whitespace-nowrap">
+                  Temukan QR
+                </span>
+              </div>
+
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--text-muted)] opacity-40 shrink-0" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+
+              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[0.625rem] font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">
+                  2
+                </span>
+                <span className="text-xs sm:text-sm font-medium text-[var(--text-primary)] whitespace-nowrap">
+                  Pindai
+                </span>
+              </div>
+
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--text-muted)] opacity-40 shrink-0" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+
+              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[0.625rem] font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">
+                  3
+                </span>
+                <span className="text-xs sm:text-sm font-medium text-[var(--text-primary)] whitespace-nowrap">
+                  Telusuri Arsip
+                </span>
+              </div>
             </div>
 
-            {/* 3 Steps — Always horizontal in a single row, compact on mobile */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-4 flex-1 max-w-md lg:max-w-lg">
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[0.625rem] sm:text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">1</span>
-                <span className="text-xs sm:text-sm font-medium text-[var(--text-primary)] whitespace-nowrap">Temukan QR</span>
-              </div>
-
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[0.625rem] sm:text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">2</span>
-                <span className="text-xs sm:text-sm font-medium text-[var(--text-primary)] whitespace-nowrap">Pindai</span>
-              </div>
-
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="w-5 h-5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[0.625rem] sm:text-xs font-mono text-[var(--accent-gold)] flex items-center justify-center font-bold shrink-0">3</span>
-                <span className="text-xs sm:text-sm font-medium text-[var(--text-primary)] whitespace-nowrap">Telusuri Arsip</span>
-              </div>
-            </div>
-
-            <Link href="/panduan" className="text-xs font-mono uppercase text-[var(--accent-gold)] hover:underline self-start lg:self-auto shrink-0">
-              Panduan Lengkap &rarr;
+            <Link
+              href="/panduan"
+              className="text-xs font-mono uppercase text-[var(--accent-gold)] hover:underline inline-flex items-center gap-1 shrink-0 self-center sm:self-auto"
+            >
+              <span>Panduan Lengkap</span>
+              <span>&rarr;</span>
             </Link>
           </div>
         </div>
@@ -242,40 +261,38 @@ export default async function HomePage() {
       </section>
 
       {/* ── Tentang REKALA Teaser ── */}
-      <section className="py-16 lg:py-20 bg-[var(--bg-primary)]">
+      <section className="py-16 lg:py-20 bg-white dark:bg-zinc-950/60 transition-colors duration-200">
         <div className="container-editorial max-w-3xl">
-          <div className="relative p-6 sm:p-10 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm overflow-hidden">
+          <div className="relative rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm overflow-hidden transition-colors duration-200">
             {/* Subtle ambient glow */}
-            <div className="absolute -top-20 -right-20 w-60 h-60 bg-[var(--accent-gold)]/5 blur-[80px] rounded-full pointer-events-none" />
+            <div className="absolute -top-20 -right-20 w-60 h-60 bg-amber-500/5 dark:bg-amber-400/5 blur-[80px] rounded-full pointer-events-none" />
 
-            <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              {/* REKALA Logo */}
-              <div className="shrink-0">
+            <div className="relative z-10 flex flex-col sm:flex-row items-center text-center sm:text-left gap-6 p-6 sm:p-8">
+              {/* REKALA Logo with subtle rounded backdrop */}
+              <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200/60 dark:border-zinc-700/40 flex items-center justify-center transition-colors duration-200">
                 <Image
                   src="/logo/logo-warna.png"
                   alt="Logo REKALA"
                   width={80}
                   height={80}
-                  className="h-14 sm:h-16 w-auto object-contain"
+                  className="h-12 sm:h-14 w-auto object-contain"
                 />
               </div>
 
               {/* Content */}
               <div className="flex-1 space-y-3">
-                <h2 className="font-serif text-xl sm:text-2xl text-[var(--text-title)] font-normal">
+                <h2 className="font-serif text-xl sm:text-2xl text-zinc-900 dark:text-zinc-100 font-normal transition-colors duration-200">
                   Tentang REKALA
                 </h2>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed font-sans font-light">
-                  REKALA (Reka Kala) — Merangkai jejak waktu, menghidupkan kembali kisah sejarah Banten.
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-sans font-light transition-colors duration-200">
+                  Reka Kala — Merangkai jejak waktu, menghidupkan kembali kisah sejarah Provinsi Banten.
                 </p>
                 <Link
                   href="/about"
-                  className="btn btn-ghost inline-flex !px-5 !py-2 !min-h-0 !text-xs"
+                  className="inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-xs tracking-wider uppercase font-medium bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-amber-400 dark:text-zinc-950 dark:hover:bg-amber-300 transition-all duration-200 shadow-sm group"
                 >
-                  Selengkapnya
-                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M6 3l5 5-5 5" />
-                  </svg>
+                  <span>Pelajari Lebih Lanjut</span>
+                  <span className="transition-transform group-hover:translate-x-0.5">&rarr;</span>
                 </Link>
               </div>
             </div>

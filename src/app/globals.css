@@ -58,33 +58,33 @@
 html.light, [data-theme="light"] {
   --bg-primary: #F8F7F4;
   --bg-surface: #FFFFFF;
-  --bg-surface-elevated: #EFECE6;
-  --bg-surface-subtle: #E8E4DA;
+  --bg-surface-elevated: #F3F0EB;
+  --bg-surface-subtle: #EEEBE5;
   --bg-overlay: rgba(248, 247, 244, 0.94);
-  --header-bg: rgba(248, 247, 244, 0.90);
-  --footer-bg: #ECE8E0;
+  --header-bg: rgba(248, 247, 244, 0.92);
+  --footer-bg: #F0ECE5;
 
   --text-primary: #1A1A1E;
-  --text-secondary: #5E5B55;
+  --text-secondary: #52504B;
   --text-muted: #7E7B74;
-  --text-title: #141416;
+  --text-title: #111113;
 
   --accent-gold: #8C6D23;
   --accent-gold-hover: #73581B;
-  --accent-gold-border: rgba(140, 109, 35, 0.35);
-  --accent-gold-bg: rgba(140, 109, 35, 0.08);
-  --accent-gold-glow: rgba(140, 109, 35, 0.2);
+  --accent-gold-border: rgba(140, 109, 35, 0.30);
+  --accent-gold-bg: rgba(140, 109, 35, 0.06);
+  --accent-gold-glow: rgba(140, 109, 35, 0.18);
   --accent-gold-text-on: #FFFFFF;
 
-  --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-medium: rgba(0, 0, 0, 0.16);
+  --border-subtle: rgba(0, 0, 0, 0.07);
+  --border-medium: rgba(0, 0, 0, 0.13);
 
   --card-bg: #FFFFFF;
-  --card-border: rgba(0, 0, 0, 0.08);
-  --card-hover-border: rgba(140, 109, 35, 0.5);
-  --card-hover-bg: #FAF9F6;
+  --card-border: rgba(0, 0, 0, 0.07);
+  --card-hover-border: rgba(140, 109, 35, 0.45);
+  --card-hover-bg: #FDFCFA;
 
-  --image-placeholder-bg: #E4E0D6;
+  --image-placeholder-bg: #E8E4DC;
   --image-placeholder-vignette: linear-gradient(180deg, rgba(248,247,244,0.05) 0%, rgba(26,26,30,0.75) 100%);
 
   /* Adaptive Logo variables in Light Mode */

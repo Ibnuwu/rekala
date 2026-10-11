@@ -3,6 +3,7 @@ export interface TeamMember {
   name: string;
   role: string;
   roleCategory: 'Ketua' | 'Developer' | 'Penulis Script' | 'Observasi / Sources' | 'Dokumentasi';
+  url?: string;
   photo: {
     src: string;
     alt: string;
@@ -29,6 +30,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     name: 'Ibnu Hamdun',
     role: 'Developer',
     roleCategory: 'Developer',
+    url: 'https://airsenuwu.is-a.dev/',
     photo: {
       src: '/team/ibnu.jpg',
       alt: 'Foto Ibnu Hamdun — Developer',
