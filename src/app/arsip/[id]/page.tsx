@@ -213,13 +213,9 @@ export default async function ArchiveDetailPage({ params }: Props) {
 
             {/* ── Museum Registry Metadata Sheet ── */}
             <div className="p-5 rounded-2xl bg-stone-100/90 dark:bg-zinc-900/60 border border-zinc-200/90 dark:border-zinc-800 space-y-3.5 text-xs shadow-sm transition-colors duration-200">
-              <div className="flex items-center justify-between pb-2 border-b border-zinc-200/80 dark:border-zinc-800">
+              <div className="pb-2 border-b border-zinc-200/80 dark:border-zinc-800">
                 <span className="text-[0.625rem] font-mono uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400 font-semibold block">
                   Registri Arsip Banten
-                </span>
-                <span className="inline-flex items-center gap-1 text-[0.625rem] font-mono text-emerald-600 dark:text-emerald-400 font-medium">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  Koleksi Resmi
                 </span>
               </div>
 

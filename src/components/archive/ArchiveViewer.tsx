@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import type { Archive } from '@/data/archives';
+import { ShareModal } from '@/components/archive/ShareModal';
 
 interface ArchiveViewerProps {
   archive: Archive;
@@ -10,8 +11,8 @@ interface ArchiveViewerProps {
 
 export function ArchiveViewer({ archive }: ArchiveViewerProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
   const [imgError, setImgError] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   // Close lightbox on Escape key
   useEffect(() => {
@@ -22,28 +23,6 @@ export function ArchiveViewer({ archive }: ArchiveViewerProps) {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
-
-  const handleShare = async () => {
-    if (typeof navigator !== 'undefined') {
-      if (navigator.share) {
-        try {
-          await navigator.share({
-            title: `${archive.title} | REKALA`,
-            text: archive.shortDescription,
-            url: window.location.href,
-          });
-          return;
-        } catch {
-          // Fallback to clipboard
-        }
-      }
-      if (navigator.clipboard) {
-        await navigator.clipboard.writeText(window.location.href);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2500);
-      }
-    }
-  };
 
   return (
     <div className="space-y-3">
@@ -101,45 +80,46 @@ export function ArchiveViewer({ archive }: ArchiveViewerProps) {
         )}
       </div>
 
-      {/* ── Visual Bar Actions & Caption ── */}
-      <div className="flex flex-wrap items-center justify-between gap-2 px-1 text-xs">
-        <span className="text-zinc-500 dark:text-zinc-400 text-[0.6875rem] font-mono flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-          <span>Fotografi Monokrom &bull; Dokumentasi Asli</span>
-        </span>
+      {/* ── Visual Bar Actions ── */}
+      <div className="flex items-center justify-end gap-2 px-1 text-xs">
+        <button
+          type="button"
+          onClick={() => setIsShareOpen(true)}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider bg-stone-100 hover:bg-stone-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 transition-colors cursor-pointer"
+          title="Buka opsi bagikan dan kode QR"
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="18" cy="5" r="3" />
+            <circle cx="6" cy="12" r="3" />
+            <circle cx="18" cy="19" r="3" />
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+          </svg>
+          <span>Bagikan</span>
+        </button>
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={handleShare}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-mono uppercase tracking-wider bg-stone-100 hover:bg-stone-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 transition-colors cursor-pointer"
-            title="Bagikan atau salin tautan arsip"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="18" cy="5" r="3" />
-              <circle cx="6" cy="12" r="3" />
-              <circle cx="18" cy="19" r="3" />
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-            </svg>
-            <span>{copied ? 'Tersalin! ✓' : 'Bagikan'}</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => !imgError && setIsOpen(true)}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-mono uppercase tracking-wider bg-stone-100 hover:bg-stone-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 transition-colors cursor-pointer"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M15 3h6v6" />
-              <path d="M9 21H3v-6" />
-              <path d="M21 3l-7 7" />
-              <path d="M3 21l7-7" />
-            </svg>
-            <span>Zoom</span>
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={() => !imgError && setIsOpen(true)}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider bg-stone-100 hover:bg-stone-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 transition-colors cursor-pointer"
+          title="Buka penampil ukuran penuh"
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 3h6v6" />
+            <path d="M9 21H3v-6" />
+            <path d="M21 3l-7 7" />
+            <path d="M3 21l7-7" />
+          </svg>
+          <span>Zoom</span>
+        </button>
       </div>
+
+      {/* ── Share & QR Code Modal ── */}
+      <ShareModal
+        archive={archive}
+        isOpen={isShareOpen}
+        onClose={() => setIsShareOpen(false)}
+      />
 
       {/* ── Lightbox Modal ── */}
       {isOpen && (
