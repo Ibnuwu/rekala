@@ -105,7 +105,7 @@ export const MENTORS: TeamMember[] = [
   {
     id: 'asep',
     name: 'Asep, S.STP.',
-    role: 'Pendamping OJT — DPA / DPK Banten',
+    role: 'Pendamping OJT — DPK Banten',
     roleCategory: 'Pembimbing',
     badge: 'Pembimbing Instansi',
     photo: {
