@@ -7,7 +7,7 @@ import { ArchiveCard } from '@/components/archive/ArchiveCard';
 export const metadata: Metadata = {
   title: 'REKALA — Layanan Arsip Digital Foto Sejarah Banten',
   description:
-    'REKALA - Reka Waktu, Hidupkan Sejarah. Layanan arsip digital foto sejarah Provinsi Banten dengan kurasi modern dan akses interaktif kode QR.',
+    'REKALA — Reka Waktu, Hidupkan Sejarah. Layanan arsip digital foto sejarah Provinsi Banten dengan kurasi modern dan akses interaktif kode QR.',
   alternates: {
     canonical: '/',
   },
@@ -33,7 +33,7 @@ export default async function HomePage() {
                   Layanan Arsip Digital
                 </span>
                 <span className="text-xs font-mono text-[var(--accent-gold)]">
-                  DPK Banten
+                  Provinsi Banten
                 </span>
               </div>
 
@@ -46,9 +46,9 @@ export default async function HomePage() {
                   </span>
                 </h1>
 
-                {/* Subtitle: EXACT tagline only placed here & About page */}
+                {/* Subtitle: Standardized brand motto */}
                 <p className="font-serif italic text-base sm:text-lg text-[var(--accent-gold)]">
-                  REKALA - Reka Waktu, Hidupkan Sejarah.
+                  REKALA — Reka Waktu, Hidupkan Sejarah.
                 </p>
               </div>
 
@@ -173,55 +173,58 @@ export default async function HomePage() {
       </section>
 
       {/* ── Telusuri Kategori (Peristiwa, Bangunan, Tokoh, Budaya) ── */}
-      <section className="py-16 lg:py-24 border-b border-[var(--border-subtle)]">
+      <section className="py-10 sm:py-16 lg:py-24 border-b border-[var(--border-subtle)]">
         <div className="container-editorial">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-4 mb-6 sm:mb-12">
             <div>
-              <span className="badge-gold mb-3">
+              <span className="badge-gold mb-2 sm:mb-3">
                 Klasifikasi Arsip
               </span>
-              <h2 className="font-serif text-2xl sm:text-3xl text-[var(--text-title)] font-normal">
+              <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl text-[var(--text-title)] font-normal">
                 Telusuri Berdasarkan Kategori
               </h2>
             </div>
             <Link
               href="/galeri"
-              className="text-xs font-mono uppercase tracking-wider text-[var(--accent-gold)] hover:underline inline-flex items-center gap-1.5"
+              className="text-xs font-mono uppercase tracking-wider text-[var(--accent-gold)] hover:underline inline-flex items-center gap-1.5 self-start sm:self-auto"
             >
               Semua Koleksi &rarr;
             </Link>
           </div>
 
-          {/* Modern Responsive Category Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Clean, compact 2-column grid on mobile (< sm), 4-column on desktop */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6">
             {categoryList.map((cat, idx) => (
               <Link
                 key={cat.id}
                 href={`/galeri?kategori=${cat.id}`}
-                className="group p-6 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--accent-gold)]/50 hover:bg-[var(--bg-surface-elevated)] transition-all duration-300 flex flex-col justify-between gap-6 hover:-translate-y-1 shadow-sm"
+                className="group p-3.5 sm:p-6 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--accent-gold)]/50 hover:bg-[var(--bg-surface-elevated)] transition-all duration-300 flex flex-col justify-between gap-3 sm:gap-6 hover:-translate-y-1 shadow-sm touch-manipulation"
               >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs text-[var(--accent-gold)] font-bold tracking-widest">
+                <div className="space-y-2 sm:space-y-4">
+                  <div className="flex items-center justify-between gap-1.5">
+                    <span className="font-mono text-[0.6875rem] sm:text-xs text-[var(--accent-gold)] font-bold tracking-widest">
                       0{idx + 1}
                     </span>
-                    <span className="px-2 py-0.5 rounded text-[0.6875rem] font-mono text-[var(--text-secondary)] bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)]">
+                    <span className="px-1.5 sm:px-2 py-0.5 rounded text-[0.625rem] sm:text-[0.6875rem] font-mono text-[var(--text-secondary)] bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] truncate">
                       {cat.count} Dokumen
                     </span>
                   </div>
 
-                  <h3 className="font-serif text-xl sm:text-2xl text-[var(--text-title)] group-hover:text-[var(--accent-gold)] transition-colors font-medium">
+                  <h3 className="font-serif text-sm sm:text-xl lg:text-2xl text-[var(--text-title)] group-hover:text-[var(--accent-gold)] transition-colors font-medium leading-tight">
                     {cat.label}
                   </h3>
 
-                  <p className="text-xs text-[var(--text-secondary)] leading-relaxed font-sans font-light">
+                  <p className="hidden sm:block text-xs text-[var(--text-secondary)] leading-relaxed font-sans font-light">
                     {cat.description}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-[var(--accent-gold)]">
-                  <span>Buka Kategori</span>
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1" aria-hidden="true">
+                <div className="pt-2.5 sm:pt-4 border-t border-[var(--border-subtle)] flex items-center justify-between text-[0.6875rem] sm:text-xs font-semibold uppercase tracking-wider text-[var(--accent-gold)]">
+                  <span>
+                    <span className="inline sm:hidden">Buka</span>
+                    <span className="hidden sm:inline">Buka Kategori</span>
+                  </span>
+                  <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1 shrink-0" aria-hidden="true">
                     <path d="M6 3l5 5-5 5" />
                   </svg>
                 </div>
@@ -285,7 +288,7 @@ export default async function HomePage() {
                   Tentang REKALA
                 </h2>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-sans font-light transition-colors duration-200">
-                  Reka Kala — Merangkai jejak waktu, menghidupkan kembali kisah sejarah Provinsi Banten.
+                  REKALA — Reka Waktu, Hidupkan Sejarah.
                 </p>
                 <Link
                   href="/about"

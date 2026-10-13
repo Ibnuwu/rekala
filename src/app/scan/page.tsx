@@ -5,7 +5,7 @@ import { QRScanner } from '@/components/scanner/QRScanner';
 export const metadata: Metadata = {
   title: 'Pemindai QR Code Arsip Digital',
   description:
-    'Pindai kode QR yang tertera pada bingkai foto arsip DPK Banten untuk mengakses narasi dan data sejarah digital secara langsung.',
+    'Pindai kode QR yang tertera pada bingkai foto arsip untuk mengakses narasi dan data sejarah digital secara langsung.',
   alternates: {
     canonical: '/scan',
   },
@@ -27,7 +27,7 @@ export default async function ScanPage() {
           </h1>
           <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed font-light">
             Arahkan kamera ponsel Anda pada kode QR yang terpasang di samping fisik foto arsip
-            untuk menelusuri kisah lengkap, konteks peristiwa, serta data historis autentik DPK Banten.
+            untuk menelusuri kisah lengkap, konteks peristiwa, serta data historis autentik Provinsi Banten.
           </p>
         </div>
 

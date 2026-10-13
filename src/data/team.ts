@@ -2,8 +2,9 @@ export interface TeamMember {
   id: string;
   name: string;
   role: string;
-  roleCategory: 'Ketua' | 'Developer' | 'Penulis Script' | 'Observasi / Sources' | 'Dokumentasi';
+  roleCategory: 'Ketua' | 'Developer' | 'Penulis Script' | 'Observasi / Sources' | 'Dokumentasi' | 'Pembimbing';
   url?: string;
+  badge?: string;
   photo: {
     src: string;
     alt: string;
@@ -99,3 +100,33 @@ export const TEAM_MEMBERS: TeamMember[] = [
     },
   },
 ];
+
+export const MENTORS: TeamMember[] = [
+  {
+    id: 'asep',
+    name: 'Asep, S.STP.',
+    role: 'Pendamping OJT — DPA / DPK Banten',
+    roleCategory: 'Pembimbing',
+    badge: 'Pembimbing Instansi',
+    photo: {
+      src: '/team/placeholder-mentor.jpg',
+      alt: 'Foto Asep, S.STP. — Pendamping OJT',
+      width: 800,
+      height: 1000,
+    },
+  },
+  {
+    id: 'sigit',
+    name: 'Sigit, S.Sos.',
+    role: 'Pendamping OJT — Perpusda Banten',
+    roleCategory: 'Pembimbing',
+    badge: 'Pembimbing Instansi',
+    photo: {
+      src: '/team/placeholder-mentor.jpg',
+      alt: 'Foto Sigit, S.Sos. — Pendamping OJT',
+      width: 800,
+      height: 1000,
+    },
+  },
+];
+

@@ -402,7 +402,18 @@ html.light .footer-logo-adaptive,
   }
 }
 
-/* ── Prevent horizontal overflow on mobile ── */
+/* ── Prevent horizontal overflow on mobile without blocking layout scrolling ── */
+html,
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+/* ── Utility to hide scrollbars ── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

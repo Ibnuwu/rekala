@@ -194,7 +194,7 @@ export function MobileMenu() {
           <nav className="flex-1 overflow-y-auto px-4 py-5 overscroll-contain" aria-label="Menu Mobile">
             <div className="space-y-1">
               {NAV_ITEMS.map((item) => {
-                const isActive = pathname === item.href;
+                const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
 
                 return (
                   <Link
@@ -205,9 +205,11 @@ export function MobileMenu() {
                       group flex items-center gap-3.5 px-3 py-3 rounded-xl transition-all duration-150 cursor-pointer touch-manipulation min-h-[48px]
                       ${
                         item.isSpecial
-                          ? 'bg-amber-500/10 dark:bg-amber-400/10 text-amber-800 dark:text-amber-300 border border-amber-500/30 dark:border-amber-400/30 font-medium'
+                          ? isActive
+                            ? 'bg-amber-500/20 dark:bg-amber-400/20 text-amber-900 dark:text-amber-200 border border-amber-500 dark:border-amber-400 font-semibold shadow-xs ring-1 ring-amber-500/30'
+                            : 'bg-amber-500/10 dark:bg-amber-400/10 text-amber-800 dark:text-amber-300 border border-amber-500/30 dark:border-amber-400/30 font-medium'
                           : isActive
-                          ? 'bg-zinc-200/80 dark:bg-white/[0.08] text-zinc-900 dark:text-zinc-100 font-semibold border border-zinc-300/60 dark:border-white/10'
+                          ? 'bg-amber-500/10 dark:bg-amber-400/15 text-amber-900 dark:text-amber-300 font-semibold border border-amber-500/30 dark:border-amber-400/30 shadow-xs'
                           : 'text-zinc-700 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/50 dark:hover:bg-white/[0.04]'
                       }
                     `}
@@ -221,7 +223,7 @@ export function MobileMenu() {
                           item.isSpecial
                             ? 'bg-amber-600 dark:bg-amber-400 text-white dark:text-zinc-950'
                             : isActive
-                            ? 'bg-zinc-300/80 dark:bg-white/10 text-amber-700 dark:text-amber-400'
+                            ? 'bg-amber-500/20 dark:bg-amber-400/20 text-amber-700 dark:text-amber-400 border border-amber-500/30'
                             : 'bg-zinc-200/60 dark:bg-white/[0.04] text-zinc-700 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-200'
                         }
                       `}
@@ -248,7 +250,7 @@ export function MobileMenu() {
 
                     {/* Active indicator dot */}
                     {isActive && (
-                      <div className="w-1.5 h-1.5 rounded-full bg-amber-600 dark:bg-amber-400 shrink-0" />
+                      <div className="w-2 h-2 rounded-full bg-amber-600 dark:bg-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.6)] shrink-0" />
                     )}
                   </Link>
                 );
@@ -262,7 +264,7 @@ export function MobileMenu() {
           {/* Drawer Footer */}
           <div className="px-5 py-4 text-center shrink-0">
             <p className="text-[0.625rem] text-zinc-500 dark:text-zinc-500 font-sans tracking-wide">
-              © 2026 REKALA — OJT BBPVP Serang × DPK Banten
+              © 2026 REKALA — Proyek OJT BBPVP Serang
             </p>
           </div>
         </div>
@@ -273,14 +275,14 @@ export function MobileMenu() {
 
   return (
     <div className="lg:hidden">
-      {/* Minimal Icon Button for Mobile Toggle */}
+      {/* High-contrast mobile menu icon button */}
       <button
         ref={toggleBtnRef}
         type="button"
         onClick={toggleMenu}
         aria-expanded={isOpen}
         aria-label={isOpen ? 'Tutup menu navigasi' : 'Buka navigasi'}
-        className="w-9 h-9 rounded-lg bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-gold)] active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-[var(--accent-gold)] cursor-pointer touch-manipulation select-none"
+        className="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm hover:border-amber-500/50 active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-amber-500 cursor-pointer touch-manipulation select-none flex items-center justify-center"
       >
         {isOpen ? (
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">

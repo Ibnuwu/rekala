@@ -8,8 +8,8 @@ import { ThemeToggle } from '@/components/theme/ThemeToggle';
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-md bg-[var(--header-bg)] border-b border-[var(--border-subtle)] transition-colors duration-300">
-      <div className="container-editorial flex items-center justify-between h-16 sm:h-[68px]">
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/90 dark:bg-zinc-950/90 border-b border-zinc-200/80 dark:border-zinc-800/80 transition-all duration-200">
+      <div className="container-editorial flex items-center justify-between h-14 sm:h-16">
         {/* Left: Clean Standalone Brand Logo */}
         <Link
           href="/"
@@ -19,33 +19,28 @@ export function Header() {
           <Image
             src="/logo/logo-dark.png"
             alt="REKALA Logo"
-            width={28}
-            height={28}
-            className="block dark:hidden object-contain"
+            width={24}
+            height={24}
+            className="h-6 w-auto block dark:hidden object-contain"
             priority
           />
           <Image
             src="/logo/logo-light.png"
             alt="REKALA Logo"
-            width={28}
-            height={28}
-            className="hidden dark:block object-contain"
+            width={24}
+            height={24}
+            className="h-6 w-auto hidden dark:block object-contain"
             priority
           />
-          <span className="font-serif font-bold text-lg sm:text-xl tracking-wider brand-logo-text leading-none">
+          <span className="font-serif font-bold text-base sm:text-lg tracking-wider brand-logo-text leading-none text-zinc-900 dark:text-zinc-100">
             REKALA
           </span>
         </Link>
 
-        {/* Right: Desktop Nav Items + Theme Switcher + Language Pill */}
+        {/* Right: Desktop Nav Items + Theme Switcher */}
         <div className="hidden lg:flex items-center gap-3.5">
           <DesktopNav />
           <ThemeToggle />
-          <div className="flex items-center gap-1.5 text-[0.6875rem] font-mono text-[var(--text-secondary)] px-2.5 py-1 rounded-full bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)]">
-            <span className="text-[var(--accent-gold)] font-bold">ID</span>
-            <span className="opacity-40">|</span>
-            <span className="hover:text-[var(--text-primary)] cursor-pointer transition-colors">EN</span>
-          </div>
         </div>
 
         {/* Right: Mobile Controls (Theme Switcher + Mobile Menu) */}

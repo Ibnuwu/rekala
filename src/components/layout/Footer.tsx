@@ -29,7 +29,7 @@ const INSTITUTIONAL_LOGOS = [
   {
     src: '/logo/perpusda-logo.png',
     alt: 'Dinas Perpustakaan dan Kearsipan Provinsi Banten',
-    title: 'DPK Banten',
+    title: 'Dinas Perpustakaan dan Kearsipan Provinsi Banten',
   },
 ];
 
@@ -41,7 +41,7 @@ export function Footer() {
   return (
     <footer className="bg-stone-100/80 dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
       <div className="container-editorial max-w-4xl flex flex-col items-center text-center gap-6 p-6 sm:py-10 sm:px-8">
-        {/* 1. Brand Header: REKALA logo + title + short tagline */}
+        {/* 1. Brand Header: REKALA logo + title + standardized tagline */}
         <div className="flex flex-col items-center gap-2">
           <Link
             href="/"
@@ -60,12 +60,12 @@ export function Footer() {
             </span>
           </Link>
           <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans max-w-sm leading-relaxed">
-            Merangkai jejak waktu, menghidupkan sejarah Banten.
+            REKALA — Reka Waktu, Hidupkan Sejarah.
           </p>
         </div>
 
-        {/* 2. Partner Logos Grid: Display all 4 institutional logos */}
-        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 py-1">
+        {/* 2. Partner Logos Grid: Display all 4 institutional logos in full natural color */}
+        <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-7 py-1">
           {INSTITUTIONAL_LOGOS.map((logo) => (
             <div
               key={logo.src}
@@ -77,7 +77,7 @@ export function Footer() {
                 alt={logo.alt}
                 width={120}
                 height={36}
-                className="h-7 sm:h-8 w-auto object-contain grayscale hover:grayscale-0 dark:brightness-105 opacity-80 hover:opacity-100 transition-all duration-300"
+                className="h-7 sm:h-8 w-auto object-contain transition-all duration-300 dark:brightness-105 hover:scale-105"
               />
             </div>
           ))}
@@ -89,7 +89,7 @@ export function Footer() {
         {/* 4. Copyright & Nav Links */}
         <div className="flex flex-col items-center gap-3 w-full">
           <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans">
-            © 2026 REKALA — Proyek OJT BBPVP Serang × DPK Banten
+            © 2026 REKALA — Proyek OJT BBPVP Serang
           </p>
 
           <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap">

@@ -15,26 +15,29 @@ export function DesktopNav() {
 
   return (
     <nav
-      className="flex items-center gap-1 bg-[var(--bg-surface-elevated)] p-1 rounded-full border border-[var(--border-subtle)]"
+      className="flex items-center gap-1 bg-zinc-100/90 dark:bg-zinc-900/90 p-1 rounded-full border border-zinc-200/80 dark:border-zinc-800/80 shadow-xs"
       aria-label="Navigasi utama"
     >
       {NAV_LINKS.map((link) => {
-        const isActive = pathname === link.href;
+        const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
         return (
           <Link
             key={link.href}
             href={link.href}
             className={`
-              relative px-4 py-1.5 text-xs font-medium uppercase tracking-wider rounded-full transition-all duration-200
+              relative px-3.5 py-1.5 text-xs font-medium uppercase tracking-wider rounded-full transition-all duration-200 inline-flex items-center gap-1.5
               ${
                 isActive
-                  ? 'bg-[var(--bg-surface)] text-[var(--accent-gold)] shadow-xs border border-[var(--border-medium)]'
-                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)]/50'
+                  ? 'bg-amber-500/15 dark:bg-amber-400/15 text-amber-800 dark:text-amber-300 font-semibold shadow-xs border border-amber-500/30 dark:border-amber-400/30 ring-1 ring-amber-500/20'
+                  : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/60 dark:hover:bg-zinc-800/60'
               }
             `}
             aria-current={isActive ? 'page' : undefined}
           >
-            {link.label}
+            {isActive && (
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-600 dark:bg-amber-400 shadow-[0_0_6px_rgba(245,158,11,0.6)] shrink-0" />
+            )}
+            <span>{link.label}</span>
           </Link>
         );
       })}

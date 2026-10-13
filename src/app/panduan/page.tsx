@@ -13,7 +13,7 @@ const STEPS = [
   {
     step: '01',
     title: 'Kunjungi Koleksi Fisik',
-    desc: 'Datangi lokasi arsip di DPK Banten atau temukan bingkai foto arsip resmi yang terpasang.',
+    desc: 'Datangi lokasi pameran arsip resmi atau temukan bingkai foto arsip resmi yang terpasang.',
   },
   {
     step: '02',
@@ -43,11 +43,11 @@ const FAQS = [
   },
   {
     q: 'Apakah koleksi foto arsip di REKALA boleh digunakan untuk penelitian?',
-    a: 'Koleksi digital REKALA terbuka untuk kepentingan edukasi dan riset. Penggunaan untuk publikasi komersial wajib berkoordinasi dengan DPK Banten.',
+    a: 'Koleksi digital REKALA terbuka untuk kepentingan edukasi dan riset. Penggunaan untuk publikasi komersial dapat berkoordinasi melalui pengelola kearsipan.',
   },
   {
     q: 'Bagaimana cara memberikan masukan atau data tambahan mengenai foto sejarah?',
-    a: 'Masyarakat dapat menyampaikan data kearsipan atau informasi tambahan kepada Seksi Kearsipan DPK Banten.',
+    a: 'Masyarakat dapat menyampaikan data kearsipan atau informasi tambahan kepada pengelola layanan kearsipan.',
   },
 ];
 

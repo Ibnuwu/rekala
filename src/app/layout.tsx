@@ -10,11 +10,11 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'REKALA — Layanan Arsip Digital Banten',
-  description: 'Eksplorasi visual dan kisah sejarah Banten melalui koleksi arsip otentik.',
+  title: 'REKALA — Reka Waktu, Hidupkan Sejarah',
+  description: 'REKALA — Reka Waktu, Hidupkan Sejarah. Eksplorasi visual dan kisah sejarah Banten melalui koleksi arsip otentik.',
   openGraph: {
-    title: 'REKALA — Layanan Arsip Digital Banten',
-    description: 'Eksplorasi visual dan kisah sejarah Banten melalui koleksi arsip otentik.',
+    title: 'REKALA — Reka Waktu, Hidupkan Sejarah',
+    description: 'REKALA — Reka Waktu, Hidupkan Sejarah. Eksplorasi visual dan kisah sejarah Banten melalui koleksi arsip otentik.',
     images: [
       {
         url: '/archives/Arsip-01.jpg',
@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className="dark scroll-smooth" suppressHydrationWarning>
+    <html lang="id" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/logo/logo-warna.png" type="image/png" />
         <link rel="apple-touch-icon" href="/logo/logo-warna.png" />
@@ -46,14 +46,17 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
-        {/* Anti-FOUC theme initialization script */}
+        {/* Anti-FOUC theme initialization script - detects device system preference */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 try {
                   var stored = localStorage.getItem('rekala-theme');
-                  var theme = stored === 'light' ? 'light' : 'dark';
+                  var theme = stored;
+                  if (!theme || theme === 'system') {
+                    theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  }
                   document.documentElement.classList.remove('dark', 'light');
                   document.documentElement.classList.add(theme);
                   document.documentElement.setAttribute('data-theme', theme);
@@ -65,12 +68,14 @@ export default function RootLayout({
         />
       </head>
       <body className="min-w-0 bg-[var(--bg-primary)] text-[var(--text-primary)] selection:bg-[var(--accent-gold)]/30 selection:text-white antialiased transition-colors duration-300">
-        <ThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
           <a href="#main-content" className="skip-link">
             Langsung ke konten
           </a>
           <Header />
-          <main id="main-content">{children}</main>
+          <main id="main-content" className="pt-16 sm:pt-20 max-w-full overflow-x-clip">
+            {children}
+          </main>
           <Analytics />
           <Footer />
         </ThemeProvider>

@@ -10,7 +10,19 @@ interface ThemeContextType {
   setTheme: (theme: Theme) => void;
 }
 
+interface ThemeProviderProps {
+  children: React.ReactNode;
+  attribute?: string;
+  defaultTheme?: string;
+  enableSystem?: boolean;
+}
+
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+function getSystemTheme(): Theme {
+  if (typeof window === 'undefined') return 'dark';
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
 
 function applyThemeToDOM(newTheme: Theme) {
   if (typeof document === 'undefined') return;
@@ -28,7 +40,11 @@ function applyThemeToDOM(newTheme: Theme) {
   }
 }
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+export function ThemeProvider({
+  children,
+  defaultTheme = 'system',
+  enableSystem = true,
+}: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
       try {
@@ -36,11 +52,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         if (stored === 'light' || stored === 'dark') {
           return stored;
         }
+        if (enableSystem || defaultTheme === 'system') {
+          return getSystemTheme();
+        }
       } catch {
         // ignore
       }
     }
-    return 'dark';
+    return defaultTheme === 'light' ? 'light' : 'dark';
   });
 
   const setTheme = useCallback((newTheme: Theme) => {
@@ -51,6 +70,29 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } catch {
       // ignore
     }
+  }, []);
+
+  // Listen for device system preference changes if user hasn't explicitly set a custom theme in storage
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      try {
+        const stored = localStorage.getItem('rekala-theme');
+        // Only react to system changes if no explicit user override or if system is requested
+        if (!stored || stored === 'system') {
+          const systemTheme: Theme = e.matches ? 'dark' : 'light';
+          setThemeState(systemTheme);
+          applyThemeToDOM(systemTheme);
+        }
+      } catch {
+        // ignore
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
   useEffect(() => {
@@ -75,3 +117,4 @@ export function useTheme() {
   }
   return context;
 }
+
