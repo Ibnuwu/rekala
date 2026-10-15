@@ -1,5 +1,7 @@
-import { archives, type Archive, type ArchiveCategory } from '@/data/archives';
+import { archives, type Archive, type ArchiveCategory, type ArchiveSource } from '@/data/archives';
 import { CATEGORIES, type Category } from '@/data/categories';
+
+export type { Archive, ArchiveCategory, ArchiveSource, Category };
 
 /**
  * Get all archives. Returns a new array (safe to mutate).
