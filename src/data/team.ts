@@ -104,7 +104,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
 export const MENTORS: TeamMember[] = [
   {
     id: 'asep',
-    name: 'Asep, S.STP.',
+    name: 'Asep, S.SUI.',
     role: 'Pendamping OJT — DPK Banten',
     roleCategory: 'Pembimbing',
     badge: 'Pembimbing Instansi',
@@ -118,6 +118,7 @@ export const MENTORS: TeamMember[] = [
   {
     id: 'sigit',
     name: 'Sigit, S.Sos.',
+
     role: 'Pendamping OJT — Perpusda Banten',
     roleCategory: 'Pembimbing',
     badge: 'Pembimbing Instansi',
