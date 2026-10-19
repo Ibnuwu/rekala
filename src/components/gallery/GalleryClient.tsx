@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import type { Archive, ArchiveCategory } from '@/data/archives';
 import { CATEGORIES } from '@/data/categories';
+import { isArchiveInCategory } from '@/lib/archives';
 import { ArchiveCard } from '@/components/archive/ArchiveCard';
 
 interface GalleryClientProps {
@@ -62,7 +63,7 @@ export function GalleryClient({ initialArchives, categories }: GalleryClientProp
     let list = [...initialArchives];
 
     if (selectedCategory !== 'all') {
-      list = list.filter((item) => item.category === selectedCategory);
+      list = list.filter((item) => isArchiveInCategory(item.category, selectedCategory));
     }
 
     if (searchQuery.trim()) {
@@ -156,7 +157,7 @@ export function GalleryClient({ initialArchives, categories }: GalleryClientProp
             </button>
 
             {categories.map((cat) => {
-              const count = initialArchives.filter((a) => a.category === cat).length;
+              const count = initialArchives.filter((a) => isArchiveInCategory(a.category, cat)).length;
               const isSelected = selectedCategory === cat;
               return (
                 <button

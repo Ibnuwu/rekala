@@ -73,7 +73,7 @@ export default function RootLayout({
             Langsung ke konten
           </a>
           <Header />
-          <main id="main-content" className="pt-16 sm:pt-20 max-w-full overflow-x-clip">
+          <main id="main-content" className="pt-14 sm:pt-16 max-w-full overflow-x-clip">
             {children}
           </main>
           <Analytics />

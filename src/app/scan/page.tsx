@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { getAllArchives } from '@/lib/archives';
-import { QRScanner } from '@/components/scanner/QRScanner';
+import { CameraHub } from '@/components/scanner/CameraHub';
 
 export const metadata: Metadata = {
-  title: 'Pemindai QR Code Arsip Digital',
+  title: 'Pemindai QR & Photobooth — REKALA',
   description:
-    'Pindai kode QR yang tertera pada bingkai foto arsip untuk mengakses narasi dan data sejarah digital secara langsung.',
+    'Pindai kode QR arsip atau abadikan momen Anda dengan bingkai retro khas REKALA — Reka Waktu, Hidupkan Sejarah.',
   alternates: {
     canonical: '/scan',
   },
@@ -15,25 +15,8 @@ export default async function ScanPage() {
   const archives = await getAllArchives();
 
   return (
-    <div className="bg-[var(--bg-primary)] text-[var(--text-primary)] min-h-screen py-12 lg:py-20 transition-colors duration-300">
-      <div className="container-editorial">
-        {/* Editorial Heading */}
-        <div className="max-w-3xl mb-10 lg:mb-14 space-y-4">
-          <span className="badge-gold">
-            Akses Langsung
-          </span>
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[var(--text-title)] font-normal">
-            Pemindai QR Arsip
-          </h1>
-          <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed font-light">
-            Arahkan kamera ponsel Anda pada kode QR yang terpasang di samping fisik foto arsip
-            untuk menelusuri kisah lengkap, konteks peristiwa, serta data historis autentik Provinsi Banten.
-          </p>
-        </div>
-
-        {/* Scanner Component */}
-        <QRScanner sampleArchives={archives} />
-      </div>
+    <div className="bg-stone-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 min-h-screen pt-14 pb-12 px-4 flex flex-col items-center justify-start relative overflow-x-hidden transition-colors duration-300">
+      <CameraHub sampleArchives={archives} />
     </div>
   );
 }

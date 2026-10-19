@@ -156,18 +156,18 @@ export function MobileMenu() {
               aria-label="REKALA — Beranda"
             >
               <Image
-                src="/logo/logo-dark.png"
+                src="/logo/logo-warna.png"
                 alt="REKALA Logo"
-                width={24}
-                height={24}
-                className="object-contain block dark:hidden"
+                width={120}
+                height={32}
+                className="object-contain block dark:hidden h-7 w-auto"
               />
               <Image
-                src="/logo/logo-light.png"
+                src="/logo/logo-putih.png"
                 alt="REKALA Logo"
-                width={24}
-                height={24}
-                className="object-contain hidden dark:block"
+                width={120}
+                height={32}
+                className="object-contain hidden dark:block h-7 w-auto"
               />
               <span className="font-serif font-bold text-base tracking-[0.2em] text-zinc-900 dark:text-zinc-100 leading-none">
                 REKALA

@@ -14,21 +14,50 @@ const STEPS = [
     step: '01',
     title: 'Kunjungi Koleksi Fisik',
     desc: 'Datangi lokasi pameran arsip resmi atau temukan bingkai foto arsip resmi yang terpasang.',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-amber-700 dark:text-amber-400" aria-hidden="true">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+        <circle cx="12" cy="10" r="3" />
+      </svg>
+    ),
   },
   {
     step: '02',
     title: 'Temukan Label QR pada Bingkai',
     desc: 'Setiap bingkai foto arsip dilengkapi dengan label informasi yang memuat kode QR khusus serta nomor ID arsip.',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-amber-700 dark:text-amber-400" aria-hidden="true">
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
+        <rect x="14" y="14" width="3" height="3" />
+        <path d="M21 14h-4v4h0" />
+        <path d="M14 21h7" />
+      </svg>
+    ),
   },
   {
     step: '03',
     title: 'Pindai dengan Kamera',
     desc: 'Gunakan fitur "Pindai QR" pada REKALA atau kamera ponsel Anda untuk mengarahkan lensa ke kode QR.',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-amber-700 dark:text-amber-400" aria-hidden="true">
+        <path d="M14.5 4h-5L7 7H4a2 2 0 00-2 2v9a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2h-3l-2.5-3z" />
+        <circle cx="12" cy="13" r="3" />
+      </svg>
+    ),
   },
   {
     step: '04',
     title: 'Pelajari Narasi & Data Sejarah',
     desc: 'Halaman digital akan langsung terbuka, menyajikan uraian sejarah, tahun, lokasi, dan konteks peristiwa secara autentik.',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-amber-700 dark:text-amber-400" aria-hidden="true">
+        <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+        <path d="M8 7h8M8 11h6" />
+      </svg>
+    ),
   },
 ];
 
@@ -53,54 +82,80 @@ const FAQS = [
 
 export default function PanduanPage() {
   return (
-    <div className="bg-[var(--bg-primary)] text-[var(--text-primary)] min-h-screen py-12 lg:py-20 transition-colors duration-300">
-      <div className="container-editorial">
-        {/* Editorial Heading */}
-        <div className="max-w-3xl mb-12 lg:mb-16 space-y-4">
-          <span className="badge-gold">Petunjuk Pengunjung</span>
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[var(--text-title)] font-normal">
+    <div className="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen pt-16 sm:pt-20 pb-12 lg:pb-20 transition-colors duration-300">
+      <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8">
+        {/* ── Hero Section ── */}
+        <header className="mb-12 sm:mb-16">
+          <span className="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 bg-amber-500/10 text-amber-800 dark:text-amber-400 rounded-full border border-amber-500/10 mb-4 inline-block">
+            Petunjuk Pengunjung
+          </span>
+          <h1 className="font-serif text-3xl sm:text-5xl font-medium text-zinc-900 dark:text-zinc-50 tracking-tight mb-4 leading-[1.1]">
             Panduan Akses &amp; Pemindaian
           </h1>
-          <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed font-light">
+          <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-xl leading-relaxed">
             Panduan praktis bagi masyarakat dalam memanfaatkan integrasi fisik dan digital
             guna menggali wawasan sejarah Banten secara menyeluruh.
           </p>
-        </div>
+        </header>
 
-        {/* Steps Grid */}
-        <section className="mb-16 lg:mb-20">
-          <span className="text-[0.6875rem] font-mono uppercase tracking-[0.2em] text-[var(--accent-gold)] block mb-6">
+        {/* ── Fluid Visual Timeline ── */}
+        <section className="mb-16 sm:mb-20">
+          <span className="text-[10px] font-semibold tracking-widest uppercase text-amber-800 dark:text-amber-400 block mb-8">
             Alur Pemindaian Kode QR
           </span>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {STEPS.map((item) => (
-              <div key={item.step} className="p-6 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-3 shadow-sm">
-                <span className="font-mono text-2xl text-[var(--accent-gold)] font-bold">{item.step}</span>
-                <h3 className="font-serif text-lg text-[var(--text-title)] font-medium">{item.title}</h3>
-                <p className="text-xs text-[var(--text-secondary)] leading-relaxed font-sans font-light">{item.desc}</p>
+
+          <div className="relative border-l border-zinc-200/80 dark:border-zinc-800 ml-4 pl-8 space-y-12 py-2">
+            {STEPS.map((item, idx) => (
+              <div key={item.step} className="relative">
+                {/* Floating Step Number Pill — positioned on the timeline line */}
+                <span className="absolute -left-[45px] flex items-center justify-center w-8 h-8 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-400 font-serif font-bold border border-amber-200/60 dark:border-amber-800/50 text-xs sm:text-sm shadow-sm">
+                  {item.step}
+                </span>
+
+                {/* Step Content */}
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2.5">
+                    <span className="p-1.5 rounded-lg bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200/40 dark:border-amber-800/30">
+                      {item.icon}
+                    </span>
+                    <h3 className="text-base sm:text-lg font-serif font-semibold text-zinc-900 dark:text-zinc-100">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+
+                {/* Subtle connector dot at the end of last item */}
+                {idx === STEPS.length - 1 && (
+                  <span className="absolute -left-[37.5px] -bottom-6 w-3 h-3 rounded-full bg-amber-500/30 dark:bg-amber-400/20 border border-amber-300/50 dark:border-amber-700/40" />
+                )}
               </div>
             ))}
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="mb-16 lg:mb-20 pt-12 border-t border-[var(--border-subtle)]">
-          <div className="max-w-3xl space-y-6">
-            <span className="badge-gold">Informasi Umum</span>
-            <h2 className="font-serif text-2xl sm:text-3xl text-[var(--text-title)] font-normal">Pertanyaan yang Sering Diajukan (FAQ)</h2>
-            <div className="divide-y divide-[var(--border-subtle)] rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] overflow-hidden shadow-sm">
-              {FAQS.map((faq, i) => (
-                <div key={i} className="p-6 space-y-2">
-                  <h3 className="font-serif text-base text-[var(--text-title)] font-medium flex items-start gap-3">
-                    <span className="text-[var(--accent-gold)] font-mono text-sm font-bold">T:</span>
-                    <span>{faq.q}</span>
-                  </h3>
-                  <p className="text-xs text-[var(--text-secondary)] leading-relaxed pl-6 font-sans font-light">
-                    {faq.a}
-                  </p>
-                </div>
-              ))}
-            </div>
+        {/* ── FAQ Section ── */}
+        <section className="pt-10 sm:pt-12 border-t border-zinc-200/60 dark:border-zinc-800/60">
+          <span className="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 bg-amber-500/10 text-amber-800 dark:text-amber-400 rounded-full border border-amber-500/10 mb-4 inline-block">
+            Informasi Umum
+          </span>
+          <h2 className="font-serif text-2xl sm:text-3xl font-medium text-zinc-900 dark:text-zinc-50 tracking-tight mb-8 leading-tight">
+            Pertanyaan yang Sering Diajukan
+          </h2>
+
+          <div className="space-y-0 divide-y divide-zinc-200/60 dark:divide-zinc-800/60">
+            {FAQS.map((faq, i) => (
+              <div key={i} className="py-5 sm:py-6">
+                <h3 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-1.5 leading-snug">
+                  {faq.q}
+                </h3>
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  {faq.a}
+                </p>
+              </div>
+            ))}
           </div>
         </section>
       </div>

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="bg-[var(--bg-primary)] text-[var(--text-primary)] min-h-screen py-12 lg:py-20 transition-colors duration-300">
+    <div className="bg-[var(--bg-primary)] text-[var(--text-primary)] min-h-screen pt-16 pb-12 lg:pb-20 transition-colors duration-300">
       <div className="container-editorial">
         {/* Header: Apa itu REKALA? */}
         <div className="max-w-3xl mb-12 lg:mb-16 space-y-6">

@@ -18,9 +18,9 @@ export default async function HomePage() {
   const categoryList = await getCategoriesWithCounts();
 
   return (
-    <div className="bg-[var(--bg-primary)] text-[var(--text-primary)] min-h-screen transition-colors duration-300">
+    <div className="bg-[var(--bg-primary)] text-[var(--text-primary)] min-h-screen pt-14 transition-colors duration-300">
       {/* ── Hero Section ── */}
-      <section className="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 border-b border-[var(--border-subtle)]">
+      <section className="relative overflow-hidden pt-3 pb-6 sm:pt-12 sm:pb-20 lg:pt-20 lg:pb-28 border-b border-[var(--border-subtle)]">
         {/* Subtle Ambient Glow */}
         <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[var(--accent-gold)]/5 blur-[140px] pointer-events-none rounded-full" />
 
@@ -28,12 +28,9 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Left: Typography & Intro */}
             <div className="lg:col-span-6 flex flex-col gap-6">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center">
                 <span className="badge-gold">
                   Layanan Arsip Digital
-                </span>
-                <span className="text-xs font-mono text-[var(--accent-gold)]">
-                  Provinsi Banten
                 </span>
               </div>
 
@@ -202,7 +199,7 @@ export default async function HomePage() {
               >
                 <div className="space-y-2 sm:space-y-4">
                   <div className="flex items-center justify-between gap-1.5">
-                    <span className="font-mono text-[0.6875rem] sm:text-xs text-[var(--accent-gold)] font-bold tracking-widest">
+                    <span className="hidden sm:inline font-mono text-[0.6875rem] sm:text-xs text-[var(--accent-gold)] font-bold tracking-widest">
                       0{idx + 1}
                     </span>
                     <span className="px-1.5 sm:px-2 py-0.5 rounded text-[0.625rem] sm:text-[0.6875rem] font-mono text-[var(--text-secondary)] bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] truncate">
@@ -219,7 +216,7 @@ export default async function HomePage() {
                   </p>
                 </div>
 
-                <div className="pt-2.5 sm:pt-4 border-t border-[var(--border-subtle)] flex items-center justify-between text-[0.6875rem] sm:text-xs font-semibold uppercase tracking-wider text-[var(--accent-gold)]">
+                <div className="pt-2.5 sm:pt-4 border-t border-[var(--border-subtle)] hidden sm:flex items-center justify-between text-[0.6875rem] sm:text-xs font-semibold uppercase tracking-wider text-[var(--accent-gold)]">
                   <span>
                     <span className="inline sm:hidden">Buka</span>
                     <span className="hidden sm:inline">Buka Kategori</span>

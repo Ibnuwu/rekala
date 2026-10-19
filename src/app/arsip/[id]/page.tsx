@@ -85,78 +85,89 @@ export default async function ArchiveDetailPage({ params }: Props) {
   const { p1, p2, highlight } = parseNarrative(archive.description, archive.context);
 
   return (
-    <main className="bg-[var(--bg-primary)] text-[var(--text-primary)] min-h-screen pt-16 sm:pt-20 pb-12 sm:pb-16 lg:pb-20 px-4 sm:px-6 lg:px-8 transition-colors duration-300 overflow-x-hidden">
-      <article className="container-editorial w-full max-w-5xl mx-auto">
-        {/* Top: Breadcrumb bar & Quick Meta */}
-        <div className="mb-6 sm:mb-8 flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]">
+    <div className="bg-[var(--bg-primary)] text-[var(--text-primary)] min-h-screen pt-16 pb-12 sm:pb-16 lg:pb-20 px-4 sm:px-6 lg:px-8 transition-colors duration-300 overflow-x-hidden">
+      <article className="container-editorial w-full max-w-5xl mx-auto mt-0 pt-0">
+        {/* Desktop Top: Breadcrumb bar & Category Pill */}
+        <div className="hidden lg:flex items-center justify-between mt-0 pt-0 pb-3 mb-6 border-b border-zinc-200/60 dark:border-zinc-800/60">
           <Link
             href="/galeri"
-            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-600 dark:text-zinc-400 hover:text-amber-700 dark:hover:text-amber-400 transition-colors"
+            className="text-xs font-semibold tracking-wider text-zinc-600 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors flex items-center gap-1.5"
           >
             <span>&larr;</span>
             <span>Kembali ke Galeri</span>
           </Link>
 
-          <div className="flex items-center gap-2 text-xs font-mono">
-            <span className="px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-amber-700 dark:text-amber-400 font-semibold uppercase">
+          <span className="text-[11px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-400 border border-amber-200/60 dark:border-amber-800/50">
+            {archive.category}
+          </span>
+        </div>
+
+        {/* Mobile Header: Compact Inline Breadcrumb & Category Bar directly above title + Metadata Flow */}
+        <div className="block lg:hidden mt-0 pt-0 mb-3 space-y-1.5">
+          {/* Compact inline breadcrumb and category without horizontal border line */}
+          <div className="flex items-center justify-between gap-2 mt-0 pt-0 mb-1.5">
+            <Link
+              href="/galeri"
+              className="text-xs font-semibold tracking-wider text-zinc-600 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors flex items-center gap-1"
+            >
+              <span>&larr;</span>
+              <span>Kembali</span>
+            </Link>
+
+            <span className="text-[11px] font-semibold tracking-widest uppercase px-2.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-400 border border-amber-200/60 dark:border-amber-800/50">
               {archive.category}
             </span>
           </div>
-        </div>
 
-        {/* Mobile Title (Above image on mobile for immediate context) */}
-        <div className="block lg:hidden mb-6 space-y-2.5 pt-1">
-          <span
-            className="text-xs font-mono uppercase tracking-[0.2em] text-amber-700 dark:text-amber-400 font-semibold block"
-            dangerouslySetInnerHTML={{ __html: periodTag }}
-          />
-          <h1 className="font-serif text-2xl sm:text-3xl text-zinc-900 dark:text-zinc-100 leading-tight break-words font-medium">
+          {/* Compact Title (text-xl, leading-snug) */}
+          <h1 className="font-serif text-xl sm:text-2xl text-zinc-900 dark:text-zinc-100 leading-snug break-words font-medium">
             {archive.title}
           </h1>
-          {archive.location && (
-            <p className="text-xs font-mono text-zinc-600 dark:text-zinc-400 uppercase tracking-wider pt-0.5 font-medium">
-              Wilayah: {archive.location}
-            </p>
-          )}
+
+          {/* Natural Flow Metadata Badges (Year & Region only) */}
+          <div className="flex items-center flex-wrap gap-2 pt-0.5">
+            {archive.year && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-800 dark:text-amber-300 font-mono font-medium text-xs">
+                {archive.year}
+              </span>
+            )}
+            {archive.location && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-sans font-medium text-xs border border-zinc-200/60 dark:border-zinc-700/60">
+                {archive.location}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
-          {/* Left Column: Photo Container & Fact Highlights */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-14 items-start">
+          {/* Left Column: Photo Container & Desktop Fact Highlights */}
           <div className="lg:col-span-7 space-y-6">
             <ArchiveViewer archive={archive} />
 
-            {/* Quick Historical Highlights Strip (Fakta Kunci) */}
-            <div className="grid grid-cols-3 gap-2.5 sm:gap-4 p-3.5 sm:p-5 rounded-2xl bg-zinc-100/80 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 transition-colors duration-200 shadow-xs">
+            {/* Desktop Quick Historical Highlights Strip (Fakta Kunci) */}
+            <div className="hidden lg:grid grid-cols-2 gap-4 p-4 rounded-2xl bg-zinc-100/80 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 transition-colors duration-200 shadow-xs">
               <div className="min-w-0 space-y-1">
-                <span className="text-[0.6875rem] sm:text-xs font-mono text-zinc-600 dark:text-zinc-400 font-semibold uppercase tracking-wider block truncate">
+                <span className="text-xs font-mono text-zinc-600 dark:text-zinc-400 font-semibold uppercase tracking-wider block truncate">
                   Periode
                 </span>
-                <span className="font-mono text-xs sm:text-sm font-semibold text-amber-700 dark:text-amber-400 block truncate">
+                <span className="font-mono text-sm font-semibold text-amber-700 dark:text-amber-400 block truncate">
                   {archive.year ? `Tahun ${archive.year}` : 'Abad ke-19'}
                 </span>
               </div>
-              <div className="min-w-0 space-y-1 border-l border-zinc-200 dark:border-zinc-800 pl-2.5 sm:pl-4">
-                <span className="text-[0.6875rem] sm:text-xs font-mono text-zinc-600 dark:text-zinc-400 font-semibold uppercase tracking-wider block truncate">
+              <div className="min-w-0 space-y-1 border-l border-zinc-200 dark:border-zinc-800 pl-4">
+                <span className="text-xs font-mono text-zinc-600 dark:text-zinc-400 font-semibold uppercase tracking-wider block truncate">
                   Wilayah
                 </span>
-                <span className="font-sans text-xs sm:text-sm font-medium text-zinc-900 dark:text-zinc-100 block truncate">
+                <span className="font-sans text-sm font-medium text-zinc-900 dark:text-zinc-100 block truncate">
                   {archive.location || 'Banten'}
-                </span>
-              </div>
-              <div className="min-w-0 space-y-1 border-l border-zinc-200 dark:border-zinc-800 pl-2.5 sm:pl-4">
-                <span className="text-[0.6875rem] sm:text-xs font-mono text-zinc-600 dark:text-zinc-400 font-semibold uppercase tracking-wider block truncate">
-                  Status
-                </span>
-                <span className="font-mono text-xs sm:text-sm font-semibold text-emerald-700 dark:text-emerald-400 block truncate">
-                  Terverifikasi
                 </span>
               </div>
             </div>
           </div>
 
           {/* Right Column: Editorial Narrative & Metadata */}
-          <div className="lg:col-span-5 space-y-7">
+          <div className="lg:col-span-5 space-y-6 mt-6 sm:mt-8 lg:mt-0 mb-8">
             {/* Desktop Header */}
             <div className="hidden lg:block space-y-3 pb-6 border-b border-[var(--border-subtle)]">
               <span
@@ -175,27 +186,24 @@ export default async function ArchiveDetailPage({ params }: Props) {
 
             {/* ── Editorial Narrative Section ── */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-600 dark:bg-amber-500" />
-                <span className="text-xs font-mono uppercase tracking-[0.18em] text-amber-700 dark:text-amber-400 font-semibold block">
-                  Telaah &amp; Narasi Historis
-                </span>
-              </div>
+              <span className="text-xs font-semibold tracking-wider text-amber-700 dark:text-amber-400 uppercase mb-3 block">
+                Telaah &amp; Narasi Historis
+              </span>
 
               {/* First Paragraph with Classic Editorial Drop Cap */}
               <div className="font-sans space-y-4">
-                <p className="first-letter:float-left first-letter:text-4xl sm:first-letter:text-5xl first-letter:font-serif first-letter:font-bold first-letter:mr-3 first-letter:text-amber-700 dark:first-letter:text-amber-400 first-letter:leading-none text-base leading-relaxed sm:leading-7 text-zinc-900 dark:text-zinc-100 font-normal">
+                <p className="first-letter:float-left first-letter:text-3xl sm:first-letter:text-4xl first-letter:font-serif first-letter:font-bold first-letter:mr-2.5 first-letter:text-amber-700 dark:first-letter:text-amber-400 first-letter:leading-none text-[15px] sm:text-base leading-relaxed sm:leading-7 text-zinc-900 dark:text-zinc-100 font-normal">
                   {p1}
                 </p>
 
                 {/* Stylized Historical Pull Quote */}
                 {highlight && (
-                  <blockquote className="my-5 p-4 sm:p-5 rounded-2xl bg-amber-50/80 dark:bg-amber-950/20 border-l-4 border-amber-600 dark:border-amber-500 border-y border-r border-amber-200/60 dark:border-amber-900/40 transition-colors duration-200">
+                  <blockquote className="my-6 p-4 border-l-4 border-r-0 border-t-0 border-b-0 border-amber-600 dark:border-amber-500 bg-amber-50/60 dark:bg-amber-950/20 rounded-r-xl italic transition-colors duration-200">
                     <div className="flex items-start gap-3">
                       <span className="text-amber-600 dark:text-amber-500 font-serif text-3xl leading-none select-none shrink-0" aria-hidden="true">
                         &ldquo;
                       </span>
-                      <p className="font-serif italic text-base leading-relaxed text-zinc-900 dark:text-zinc-200 font-medium">
+                      <p className="font-serif italic text-sm sm:text-base leading-relaxed text-zinc-900 dark:text-zinc-200 font-medium">
                         {highlight}
                       </p>
                     </div>
@@ -204,7 +212,7 @@ export default async function ArchiveDetailPage({ params }: Props) {
 
                 {/* Second Paragraph (Continuing Narrative) */}
                 {p2 && (
-                  <p className="text-base leading-relaxed sm:leading-7 text-zinc-900 dark:text-zinc-100 font-normal">
+                  <p className="text-[15px] sm:text-base leading-relaxed sm:leading-7 text-zinc-900 dark:text-zinc-100 font-normal">
                     {p2}
                   </p>
                 )}
@@ -304,6 +312,6 @@ export default async function ArchiveDetailPage({ params }: Props) {
           </div>
         )}
       </article>
-    </main>
+    </div>
   );
 }

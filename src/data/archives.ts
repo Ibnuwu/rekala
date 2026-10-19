@@ -1,6 +1,18 @@
 import { type CategoryLabel, CATEGORY_LABELS } from './categories';
 
-export type ArchiveCategory = CategoryLabel;
+export type ArchiveCategory =
+  | CategoryLabel
+  | 'Infrastruktur'
+  | 'Pertahanan & Cagar Budaya'
+  | 'Seni & Seni Tradisional'
+  | 'Bangunan Bersejarah'
+  | 'Tradisi & Sosial'
+  | 'Sosial & Tokoh'
+  | 'Peristiwa Sejarah'
+  | 'Tradisi & Adat'
+  | 'Cagar Budaya'
+  | 'Alam & Pesisir'
+  | (string & {});
 
 export type ArchiveSource = {
   title: string;
@@ -25,6 +37,7 @@ export type Archive = {
   };
   featured?: boolean;
   isPlaceholder?: boolean;
+  verified?: boolean;
 };
 
 export const CATEGORIES = CATEGORY_LABELS;
@@ -277,5 +290,393 @@ export const archives: Archive[] = [
       height: 768,
     },
     featured: true,
+  },
+  {
+    id: 'Arsip-10',
+    title: 'Jembatan Kereta Api di Rangkasbitung, Tahun 1920',
+    year: '1920',
+    location: 'Rangkasbitung, Lebak',
+    category: 'Infrastruktur',
+    shortDescription:
+      'Dokumentasi konstruksi jembatan rangka besi kereta api di Rangkasbitung pada era Hindia Belanda tahun 1920.',
+    description:
+      'Foto tersebut memperlihatkan jembatan kereta api di Rangkasbitung pada tahun 1920. Jembatan ini memiliki konstruksi rangka besi yang memanjang mengikuti jalur rel kereta api. Pada bagian tengah terlihat struktur rangka jembatan yang membentang lurus, sedangkan di sisi kiri dan kanan terdapat lingkungan sekitar yang masih didominasi pepohonan. Jembatan tersebut merupakan bagian dari perkembangan sarana transportasi kereta api di wilayah Rangkasbitung pada masa Hindia Belanda. Keberadaan jalur kereta api berperan penting dalam mendukung mobilitas masyarakat serta pengangkutan barang dari dan menuju wilayah Lebak.',
+    context:
+      'Keberadaan jalur kereta api berperan penting dalam mendukung mobilitas masyarakat serta pengangkutan komoditas dari dan menuju wilayah Lebak.',
+    sources: [
+      {
+        title: 'Daftar Arsip Foto KIT Jawa Barat 1930 – ANRI',
+        url: 'https://www.anri.go.id/download/daftar-arsip-foto-kit-jawa-barat-1930-1633327812',
+      },
+      {
+        title: 'Sejarah Stasiun Rangkasbitung – Ensiklopedia Stasiun',
+        url: 'https://p2k.stekom.ac.id/ensiklopedia/Stasiun_Rangkasbitung',
+      },
+    ],
+    image: {
+      src: '/archives/a.jpeg',
+      alt: 'Jembatan Kereta Api di Rangkasbitung, Tahun 1920',
+      width: 878,
+      height: 1235,
+    },
+    featured: true,
+    verified: true,
+  },
+  {
+    id: 'Arsip-11',
+    title: 'Meriam Ki Amuk di Karangantu Serang, Tahun 1935',
+    year: '1935',
+    location: 'Karangantu, Kota Serang',
+    category: 'Pertahanan & Cagar Budaya',
+    shortDescription:
+      'Dokumentasi peninggalan meriam legendaris Ki Amuk di kawasan pelabuhan Karangantu, Serang tahun 1935.',
+    description:
+      'Gambar tersebut memperlihatkan Meriam Ki Amuk yang berada di kawasan Karangantu, Serang, pada tahun 1935. Meriam ini merupakan salah satu peninggalan bersejarah dari masa Kesultanan Banten yang dahulu berfungsi sebagai bagian dari sistem pertahanan maritim untuk melindungi kawasan pelabuhan dari ancaman musuh. Meriam Ki Amuk awalnya ditempatkan di sekitar Pelabuhan Karangantu, menghadap ke arah laut. Seiring waktu, meriam tersebut dipindahkan dan kini menjadi koleksi Museum Situs Kepurbakalaan Banten Lama.',
+    context:
+      'Meriam Ki Amuk merupakan salah satu peninggalan bersejarah dari masa Kesultanan Banten yang dahulu berfungsi sebagai pertahanan maritim utama.',
+    sources: [
+      {
+        title: 'Meriam Ki Amuk – Balai Pelestarian Cagar Budaya Banten',
+        url: 'https://kebudayaan.kemdikbud.go.id/bpcbbanten/meriam-ki-amuk/',
+      },
+      {
+        title: 'Meriam Ki Amuk – Budaya Indonesia',
+        url: 'https://budaya-indonesia.org/Meriam-Ki-Amuk-1',
+      },
+      {
+        title: 'Buku Ragam Pusaka Banten – Repositori Kemendikdasmen',
+        url: 'https://repositori.kemendikdasmen.go.id/25723/2/Buku%20Ragam%20Pusaka%20Banten.pdf',
+      },
+    ],
+    image: {
+      src: '/archives/b.jpeg',
+      alt: 'Meriam Ki Amuk di Karangantu Serang, Tahun 1935',
+      width: 1280,
+      height: 839,
+    },
+    featured: true,
+    verified: true,
+  },
+  {
+    id: 'Arsip-12',
+    title: 'Pemain Kecapi dari Baduy di Serang, Tahun 1910',
+    year: '1910',
+    location: 'Serang / Lebak',
+    category: 'Seni & Seni Tradisional',
+    shortDescription:
+      'Dokumentasi pemain musik kecapi tradisional masyarakat Baduy di wilayah Serang pada tahun 1910.',
+    description:
+      'Foto tersebut memperlihatkan seorang pemain kecapi dari masyarakat Baduy yang berada di wilayah Serang pada tahun 1910. Dalam foto hitam putih tersebut, terlihat seorang pria duduk di atas alas sambil memainkan alat musik kecapi, dengan pepohonan dan lingkungan alam di sekitarnya. Kacapi merupakan alat musik petik tradisional masyarakat Sunda, termasuk masyarakat adat Kanekes atau Baduy di Banten.',
+    context:
+      'Kacapi buhun merupakan sarana musikal dan ekspresi tradisi luhur yang dijaga turun-temurun oleh masyarakat adat Kanekes.',
+    sources: [
+      {
+        title: 'Kacapi Buhun – Museum Multatuli',
+        url: 'https://museummultatuli.id/koleksi/mm-etn-2024-217/',
+      },
+      {
+        title: 'Buku Kecapi Sunda – Repositori Kemendikdasmen',
+        url: 'https://repositori.kemendikdasmen.go.id/14725/',
+      },
+    ],
+    image: {
+      src: '/archives/c.jpeg',
+      alt: 'Pemain Kecapi dari Baduy di Serang, Tahun 1910',
+      width: 1280,
+      height: 951,
+    },
+    featured: false,
+    verified: true,
+  },
+  {
+    id: 'Arsip-13',
+    title: 'Masjid Agung Serang (Masjid As Tsauroh), Tahun 1924',
+    year: '1924',
+    location: 'Kota Serang',
+    category: 'Bangunan Bersejarah',
+    shortDescription:
+      'Dokumentasi lanskap dan arsitektur bersejarah Masjid Agung Ats-Tsauroh Serang pada tahun 1924.',
+    description:
+      'Foto tersebut memperlihatkan suasana Masjid Agung Serang pada tahun 1924. Terlihat bangunan masjid dengan halaman yang luas, dihiasi gerbang atau gapura berhias ornamen, serta sekelompok masyarakat yang berkumpul di sekitar area masjid. Masjid Agung Serang, yang dahulu dikenal sebagai Masjid Pegantungan, merupakan salah satu masjid bersejarah di Kota Serang, Banten, yang diperkirakan mulai dibangun pada akhir abad ke-19.',
+    context:
+      'Masjid Agung Serang yang bermakna perjuangan merupakan salah satu pilar peradaban dan syiar Islam di pusat Kota Serang.',
+    sources: [
+      {
+        title: 'Masjid Agung Ats-Tsauroh – Jakarta Islamic Centre',
+        url: 'https://dm.islamic-center.or.id/787/masjid-agung-ats-tsauroh/',
+      },
+      {
+        title: 'Mengenal Asal Usul Masjid Agung Ats-Tsauroh – Kabar Banten',
+        url: 'https://kabarbanten.pikiran-rakyat.com/seputar-banten/pr-591811983/mengenal-asal-usul-masjid-agung-ats-tsauroh-dibangun-sebelum-masa-kemerdekaan-memiliki-arti-perjuangan',
+      },
+      {
+        title: 'Profil Masjid Agung As-Tsaurah – Kementerian Agama',
+        url: 'https://kemenagcilegon.org/file/file/Penamas/poqw1327031713.pdf',
+      },
+    ],
+    image: {
+      src: '/archives/d.jpeg',
+      alt: 'Masjid Agung Serang (Masjid As Tsauroh), Tahun 1924',
+      width: 1280,
+      height: 817,
+    },
+    featured: true,
+    verified: true,
+  },
+  {
+    id: 'Arsip-14',
+    title: 'Suasana Acara Maulid Nabi Muhammad SAW di Kediaman Asisten Residen Serang, Tahun 1920',
+    year: '1920',
+    location: 'Kota Serang',
+    category: 'Tradisi & Sosial',
+    shortDescription:
+      'Dokumentasi perayaan Maulid Nabi Muhammad SAW di kediaman Asisten Residen Serang pada tahun 1920.',
+    description:
+      'Foto hitam putih tersebut memperlihatkan suasana peringatan Maulid Nabi Muhammad SAW yang diselenggarakan di kediaman Asisten Residen Serang (Pendopo Bupati Serang) pada tahun 1920. Tampak sejumlah orang berkumpul di dalam ruangan yang dihiasi ornamen dan dekorasi. Para peserta terlihat duduk bersama mengikuti rangkaian acara keagamaan yang menjadi bagian dari tradisi Islam di Banten.',
+    context:
+      'Tradisi peringatan Maulid Nabi mencerminkan perpaduan nilai spiritual keagamaan dan kebersamaan masyarakat Banten lintas generasi.',
+    sources: [
+      {
+        title: 'Koleksi Foto Sejarah Serang – KITLV / Wikimedia Commons',
+        url: 'https://commons.wikimedia.org/wiki/Category%3AHistory_of_Serang',
+      },
+      {
+        title: 'Makna Simbol Tradisi Maulid Nabi pada Masyarakat Banten',
+        url: 'https://id.scribd.com/document/432303596/4234-makna-Simbol-Tradisi-Maulid-Nabi-PadaMasyarakat-Banten',
+      },
+    ],
+    image: {
+      src: '/archives/e.jpeg',
+      alt: 'Suasana Acara Maulid Nabi Muhammad SAW di Kediaman Asisten Residen Serang, Tahun 1920',
+      width: 1280,
+      height: 920,
+    },
+    featured: false,
+    verified: true,
+  },
+  {
+    id: 'Arsip-15',
+    title: 'Anak-Anak Bupati Serang, Hilman dan Rifki Djajadiningrat Manakala Pesta Sunatan, Tahun 1900',
+    year: '1900',
+    location: 'Kota Serang',
+    category: 'Sosial & Tokoh',
+    shortDescription:
+      'Potret busana adat pewayangan putra Bupati Serang, Hilman dan Rifki Djajadiningrat saat khitanan tahun 1900.',
+    description:
+      'Foto hitam putih ini memperlihatkan Hilman (Imang) dan Rifki (Kikok), Putra Bupati Serang, dalam acara khitanan sekitar tahun 1900. Keduanya merupakan bagian dari keluarga bangsawan Djajadiningrat yang memiliki peranan penting dalam sejarah Banten. Dalam foto tersebut anak-anak mengenakan pakaian tradisional yang menyerupai busana tokoh pewayangan.',
+    context:
+      'Keluarga bangsawan Djajadiningrat memegang peranan terkemuka dalam sejarah politik, kebudayaan, dan pendidikan modern di Banten.',
+    sources: [
+      {
+        title: 'Acara Khitanan Dua Anak Bupati Serang – Indonesia Zaman Doeloe',
+        url: 'https://indonesia-zaman-doeloe.blogspot.com/2017/',
+      },
+      {
+        title: 'Hoesein Djajadiningrat dan Pusat Penelitian Banten',
+        url: 'https://ibnuadamaviciena.wordpress.com/2007/06/28/hoesein-djajadiningrat-dan-pusat-penelitian-banten/',
+      },
+    ],
+    image: {
+      src: '/archives/f.jpeg',
+      alt: 'Anak-Anak Bupati Serang, Hilman dan Rifki Djajadiningrat Manakala Pesta Sunatan, Tahun 1900',
+      width: 878,
+      height: 1172,
+    },
+    featured: false,
+    verified: true,
+  },
+  {
+    id: 'Arsip-16',
+    title: 'Kediaman Patih di Rangkasbitung (Pendopo Kabupaten Lebak), Tahun 1900',
+    year: '1900',
+    location: 'Rangkasbitung, Lebak',
+    category: 'Bangunan Bersejarah',
+    shortDescription:
+      'Dokumentasi arsitektur tradisional Kediaman Patih di Rangkasbitung (Pendopo Kabupaten Lebak) sekitar tahun 1900.',
+    description:
+      'Foto hitam putih ini memperlihatkan Kediaman Patih di Rangkasbitung, yang dikenal sebagai pendopo Kabupaten Lebak, sekitar Tahun 1900. Bangunan tersebut memiliki bentuk arsitektur tradisional dengan atap bertingkat dan tiang-tiang penyangga. Area di sekelilingnya tampak ditumbuhi pepohonan, sedangkan bagian depan bangunan berupa halaman terbuka.',
+    context:
+      'Pendopo Lebak menjadi saksi pusat tata kelola pemerintahan pribumi dan dinamika sosial masyarakat Lebak sejak awal abad ke-20.',
+    sources: [
+      {
+        title: 'Sejarah Rangkasbitung dan Perkembangan Kabupaten Lebak',
+        url: 'https://blog.stkippgribl.ac.id/Katapedia/wiki/Rangkasbitung%2C_Lebak',
+      },
+      {
+        title: 'Laporan Pembangunan Pusat Pemerintahan Kabupaten Lebak',
+        url: 'https://repo.jayabaya.ac.id/4889/1/Laporan%20PKM%209.pdf',
+      },
+      {
+        title: 'Koleksi Dokumentasi Sejarah Indonesia – KITLV Leiden',
+        url: 'https://digitalcollections.universiteitleiden.nl/',
+      },
+    ],
+    image: {
+      src: '/archives/g.jpeg',
+      alt: 'Kediaman Patih di Rangkasbitung (Pendopo Kabupaten Lebak), Tahun 1900',
+      width: 1280,
+      height: 855,
+    },
+    featured: true,
+    verified: true,
+  },
+  {
+    id: 'Arsip-17',
+    title: 'Sisa-sisa Rumah Hancur Akibat Peristiwa Geger Cilegon, Tahun 1888',
+    year: '1888',
+    location: 'Cilegon',
+    category: 'Peristiwa Sejarah',
+    shortDescription:
+      'Dokumentasi sisa-sisa bangunan pasca peristiwa perlawanan rakyat Geger Cilegon tahun 1888.',
+    description:
+      'Foto hitam putih ini memperlihatkan sisa-sisa rumah yang hancur akibat Peristiwa Geger Cilegon pada tahun 1888. Dalam foto tampak sejumlah orang berada di sekitar bangunan yang mengalami kerusakan. Peristiwa Geger Cilegon terjadi pada 9 Juli 1888, ketika rakyat Banten melakukan perlawanan terhadap pemerintahan kolonial Hindia Belanda yang dipimpin oleh Ki Wasyid.',
+    context:
+      'Peristiwa Geger Cilegon 1888 dipimpin oleh Ki Wasyid sebagai perlawanan heroik rakyat dan ulama Banten menentang penindasan kolonial.',
+    sources: [
+      {
+        title: 'Setelah Geger Cilegon – Indonesia Zaman Doeloe',
+        url: 'https://indonesia-zaman-doeloe.blogspot.com/2018/10/setelah-geger-cilegon-atau.html',
+      },
+      {
+        title: 'Jalannya Pemberontakan Petani Banten 1888 – Historia.id',
+        url: 'https://www.historia.id/article/jalannya-pemberontakan-petani-banten-1888-PKNwE',
+      },
+    ],
+    image: {
+      src: '/archives/h.jpeg',
+      alt: 'Sisa-sisa Rumah Hancur Akibat Peristiwa Geger Cilegon, Tahun 1888',
+      width: 1280,
+      height: 1027,
+    },
+    featured: true,
+    verified: true,
+  },
+  {
+    id: 'Arsip-18',
+    title: 'Suasana Seba Masyarakat Kanekes (Baduy) Dihadapan Bupati Ahmad Jayadiningrat, Tahun 1900',
+    year: '1900',
+    location: 'Lebak / Serang',
+    category: 'Tradisi & Adat',
+    shortDescription:
+      'Dokumentasi ritual adat sakral Seba masyarakat Kanekes (Baduy) di hadapan Bupati Ahmad Djajadiningrat tahun 1900.',
+    description:
+      'Foto hitam putih ini memperlihatkan suasana kehidupan dan ritual Seba masyarakat Kanekes (Baduy) di hadapan Bupati Ahmad Djajadiningrat pada tahun 1900. Foto ini mendokumentasikan pertemuan masyarakat Baduy dengan pejabat pemerintahan pada masa kolonial Belanda.',
+    context:
+      'Upacara Seba merupakan tradisi tahunan sakral penyerahan hasil bumi dan ungkapan rasa syukur masyarakat Baduy kepada pemerintah.',
+    sources: [
+      {
+        title: 'Dokumentasi Adat Masyarakat Baduy – Repositori Kemendikbud',
+        url: 'https://repositori.kemendikdasmen.go.id/28178/',
+      },
+      {
+        title: 'Keluarga Djajadiningrat dan Leluhurnya – Tirto.id',
+        url: 'https://tirto.id/keluarga-djajadiningrat-dan-leluhurnya-yang-berasal-dari-baduy-hfYZ',
+      },
+    ],
+    image: {
+      src: '/archives/i.jpeg',
+      alt: 'Suasana Seba Masyarakat Kanekes (Baduy) Dihadapan Bupati Ahmad Jayadiningrat, Tahun 1900',
+      width: 878,
+      height: 1149,
+    },
+    featured: true,
+    verified: true,
+  },
+  {
+    id: 'Arsip-19',
+    title: 'Makam Maulana Yusuf di Komplek Kota Inten Banten, Tahun 1915',
+    year: '1915',
+    location: 'Banten Lama, Serang',
+    category: 'Cagar Budaya',
+    shortDescription:
+      'Dokumentasi gapura dan kompleks makam bersejarah Maulana Yusuf (Sultan Banten II) di Kota Inten tahun 1915.',
+    description:
+      'Foto hitam putih ini memperlihatkan Makam Maulana Yusuf di Kompleks Kota Inten, Banten, pada tahun 1915. Foto tersebut menampilkan pintu masuk makam yang berbentuk gapura, dinding pembatas, serta beberapa anak tangga menuju area makam. Maulana Yusuf merupakan sultan kedua Kesultanan Banten yang memerintah setelah ayahnya, Maulana Hasanuddin.',
+    context:
+      'Maulana Yusuf adalah peletak dasar sistem tata kota dan pertanian terpadu serta pengembang kebudayaan Islam di Kesultanan Banten.',
+    sources: [
+      {
+        title: 'Cagar Budaya Makam Maulana Yusuf – Kemendikbud',
+        url: 'https://budaya.data.kemdikbud.go.id/cagarbudaya/objek/KB005174',
+      },
+      {
+        title: 'Jurnal Lektur Keagamaan – Kemenag RI',
+        url: 'https://jlka.kemenag.go.id/lektur/article/view/486',
+      },
+    ],
+    image: {
+      src: '/archives/j.jpeg',
+      alt: 'Makam Maulana Yusuf di Komplek Kota Inten Banten, Tahun 1915',
+      width: 1280,
+      height: 928,
+    },
+    featured: false,
+    verified: true,
+  },
+  {
+    id: 'Arsip-20',
+    title: 'Tanjung Layar, Sawarna, Lebak Tahun 1926',
+    year: '1926',
+    location: 'Sawarna, Lebak',
+    category: 'Alam & Pesisir',
+    shortDescription:
+      'Dokumentasi bentang pesisir dua karang raksasa Tanjung Layar di Sawarna, Lebak pada tahun 1926.',
+    description:
+      'Foto hitam putih ini memperlihatkan Tanjung Layar di Sawarna, Kabupaten Lebak, Banten, pada tahun 1926. Foto tersebut menampilkan dua formasi batu karang besar yang menjulang di tengah laut, dikelilingi hamparan batu karang dan pantai. Dua batu karang besar yang menjadi ciri khasnya berdiri berdekatan dan membentuk pemandangan yang unik.',
+    context:
+      'Dua karang layar yang berdiri kokoh di pantai Sawarna menyimpan keindahan geologis alami sekaligus legenda pesisir selatan Banten.',
+    sources: [
+      {
+        title: 'Daftar Arsip Foto KIT Jawa Barat – ANRI',
+        url: 'https://www.anri.go.id/download/daftar-arsip-foto-kit-jawa-barat-1930-1633327812',
+      },
+      {
+        title: 'Collectie Tropenmuseum – Sawarna 1929',
+        url: 'https://commons.wikimedia.org/wiki/File%3ACOLLECTIE_TROPENMUSEUM_Portret_van_een_Europeaan_met_een_ontkiemde_kokosnoot_op_plantage_Sawarna_TMnr_10027494.jpg',
+      },
+      {
+        title: 'Sejarah Pantai Sawarna – Pantaipedia',
+        url: 'https://www.pantaipedia.com/pantai-sawarna/',
+      },
+    ],
+    image: {
+      src: '/archives/k.jpeg',
+      alt: 'Tanjung Layar, Sawarna, Lebak Tahun 1926',
+      width: 1280,
+      height: 1000,
+    },
+    featured: true,
+    verified: true,
+  },
+  {
+    id: 'Arsip-21',
+    title: 'Suasana di Masjid Ketika Kunjungan Bung Karno Ke Lebak, Desember 1945',
+    year: '1945',
+    location: 'Lebak',
+    category: 'Peristiwa Sejarah',
+    shortDescription:
+      'Dokumentasi kerumunan masyarakat menyambut kunjungan Presiden Soekarno di halaman Masjid Lebak pada Desember 1945.',
+    description:
+      'Foto hitam putih ini memperlihatkan suasana ramai di Masjid Lebak ketika Presiden Soekarno berkunjung ke wilayah Lebak, Banten, pada Desember 1945. Terlihat banyak masyarakat berkumpul di sekitar masjid untuk menyambut kedatangan Bung Karno. Sebuah mobil tampak berada di tengah kerumunan, sementara bangunan masjid memiliki hiasan kaligrafi Arab pada bagian atasnya.',
+    context:
+      'Kunjungan Bung Karno ke Lebak pada akhir 1945 menjadi momentum bersejarah dalam mengobarkan semangat perjuangan mempertahankan kemerdekaan RI.',
+    sources: [
+      {
+        title: 'Situs Resmi Arsip Nasional Republik Indonesia (ANRI)',
+        url: 'https://www.anri.go.id/',
+      },
+      {
+        title: 'Perjalanan Presiden Sukarno ke Banten – Museum Multatuli',
+        url: 'https://museummultatuli.id/koleksi/mm-fto-2023-139/',
+      },
+    ],
+    image: {
+      src: '/archives/l.jpeg',
+      alt: 'Suasana di Masjid Ketika Kunjungan Bung Karno Ke Lebak, Desember 1945',
+      width: 1280,
+      height: 1083,
+    },
+    featured: true,
+    verified: true,
   },
 ];

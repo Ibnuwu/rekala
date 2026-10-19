@@ -25,11 +25,11 @@ export function ArchiveViewer({ archive }: ArchiveViewerProps) {
   }, [isOpen]);
 
   return (
-    <div className="space-y-3">
-      {/* ── Archival Photo Container (100% Borderless on Mobile Light Mode) ── */}
+    <div className="space-y-0">
+      {/* ── Archival Photo Container (Natural Borderless Span & Sleek Corner Overlay) ── */}
       <div
         onClick={() => !imgError && setIsOpen(true)}
-        className={`relative aspect-[4/3] sm:aspect-[16/10] w-full max-w-md mx-auto sm:max-w-none overflow-hidden rounded-2xl bg-transparent sm:bg-white dark:bg-zinc-900/45 border-0 border-none shadow-none ring-0 outline-hidden dark:border dark:border-zinc-800/80 group transition-all duration-300 ${
+        className={`relative aspect-[4/3] sm:aspect-[16/10] w-full overflow-hidden rounded-xl sm:rounded-2xl bg-zinc-900/5 dark:bg-zinc-900/40 group transition-all duration-300 ${
           !imgError ? 'cursor-zoom-in' : ''
         }`}
         role="button"
@@ -46,23 +46,57 @@ export function ArchiveViewer({ archive }: ArchiveViewerProps) {
               height={archive.image.height}
               priority
               sizes="(max-width: 1024px) 100vw, 60vw"
-              className="w-full h-full object-contain sm:object-cover rounded-2xl group-hover:scale-[1.02] transition-transform duration-500 archive-image"
+              className="w-full h-full object-cover rounded-xl sm:rounded-2xl group-hover:scale-[1.02] transition-transform duration-500 archive-image"
               onError={() => setImgError(true)}
             />
 
-            {/* Subtle Zoom Hint in Corner */}
-            <div className="absolute bottom-3 right-3 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-black/60 backdrop-blur-md border border-white/15 text-[0.6875rem] font-mono text-white/90 shadow-md group-hover:border-amber-400/50 group-hover:text-amber-300 opacity-80 group-hover:opacity-100 transition-all pointer-events-none">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                <line x1="11" y1="8" x2="11" y2="14" />
-                <line x1="8" y1="11" x2="14" y2="11" />
-              </svg>
-              <span>Perbesar</span>
+            {/* Sleek Overlay Action Buttons in Corner */}
+            <div
+              className="absolute bottom-3 right-3 flex items-center gap-2 z-10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsShareOpen(true);
+                }}
+                className="backdrop-blur-md bg-black/60 text-white p-2 sm:px-3 sm:py-1.5 rounded-full border border-white/10 hover:bg-black/80 transition-all text-xs flex items-center gap-1.5 shadow-md active:scale-95 cursor-pointer touch-manipulation"
+                title="Buka opsi bagikan dan kode QR"
+                aria-label="Bagikan arsip"
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-amber-300">
+                  <circle cx="18" cy="5" r="3" />
+                  <circle cx="6" cy="12" r="3" />
+                  <circle cx="18" cy="19" r="3" />
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                </svg>
+                <span className="hidden sm:inline font-mono text-[11px] uppercase tracking-wider">Bagikan</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (!imgError) setIsOpen(true);
+                }}
+                className="backdrop-blur-md bg-black/60 text-white p-2 sm:px-3 sm:py-1.5 rounded-full border border-white/10 hover:bg-black/80 transition-all text-xs flex items-center gap-1.5 shadow-md active:scale-95 cursor-pointer touch-manipulation"
+                title="Buka penampil ukuran penuh"
+                aria-label="Perbesar foto"
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-amber-300">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  <line x1="11" y1="8" x2="11" y2="14" />
+                  <line x1="8" y1="11" x2="14" y2="11" />
+                </svg>
+                <span className="hidden sm:inline font-mono text-[11px] uppercase tracking-wider">Zoom</span>
+              </button>
             </div>
           </>
         ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center bg-transparent sm:bg-white dark:bg-zinc-900/45 text-zinc-500 dark:text-zinc-400 rounded-2xl border-0 border-none dark:border dark:border-zinc-800/80">
+          <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center bg-transparent sm:bg-white dark:bg-zinc-900/45 text-zinc-500 dark:text-zinc-400 rounded-xl sm:rounded-2xl border-0 border-none dark:border dark:border-zinc-800/80">
             <div className="w-16 h-16 rounded-xl flex items-center justify-center text-amber-700 dark:text-amber-400 mb-3 bg-zinc-100 dark:bg-zinc-800">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                 <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -78,40 +112,6 @@ export function ArchiveViewer({ archive }: ArchiveViewerProps) {
             </span>
           </div>
         )}
-      </div>
-
-      {/* ── Visual Bar Actions (Touch-friendly & Well-spaced) ── */}
-      <div className="flex items-center justify-center sm:justify-end gap-3 mt-4 mb-6 sm:mt-3 sm:mb-0 text-xs">
-        <button
-          type="button"
-          onClick={() => setIsShareOpen(true)}
-          className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-full text-xs font-mono uppercase tracking-wider bg-zinc-100 hover:bg-zinc-200/80 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 shadow-2xs transition-all cursor-pointer active:scale-95"
-          title="Buka opsi bagikan dan kode QR"
-        >
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-amber-700 dark:text-amber-400">
-            <circle cx="18" cy="5" r="3" />
-            <circle cx="6" cy="12" r="3" />
-            <circle cx="18" cy="19" r="3" />
-            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-          </svg>
-          <span>Bagikan</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => !imgError && setIsOpen(true)}
-          className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-full text-xs font-mono uppercase tracking-wider bg-zinc-100 hover:bg-zinc-200/80 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 shadow-2xs transition-all cursor-pointer active:scale-95"
-          title="Buka penampil ukuran penuh"
-        >
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-amber-700 dark:text-amber-400">
-            <path d="M15 3h6v6" />
-            <path d="M9 21H3v-6" />
-            <path d="M21 3l-7 7" />
-            <path d="M3 21l7-7" />
-          </svg>
-          <span>Zoom</span>
-        </button>
       </div>
 
       {/* ── Share & QR Code Modal ── */}

@@ -13,23 +13,23 @@ export function Header() {
         {/* Left: Clean Standalone Brand Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 group focus-visible:outline-2 focus-visible:outline-[var(--accent-gold)]"
+          className="flex items-center gap-2.5 group focus-visible:outline-2 focus-visible:outline-[var(--accent-gold)]"
           aria-label="REKALA — Beranda"
         >
           <Image
-            src="/logo/logo-dark.png"
+            src="/logo/logo-warna.png"
             alt="REKALA Logo"
-            width={24}
-            height={24}
-            className="h-6 w-auto block dark:hidden object-contain"
+            width={120}
+            height={32}
+            className="block dark:hidden h-7 w-auto object-contain"
             priority
           />
           <Image
-            src="/logo/logo-light.png"
+            src="/logo/logo-putih.png"
             alt="REKALA Logo"
-            width={24}
-            height={24}
-            className="h-6 w-auto hidden dark:block object-contain"
+            width={120}
+            height={32}
+            className="hidden dark:block h-7 w-auto object-contain"
             priority
           />
           <span className="font-serif font-bold text-base sm:text-lg tracking-wider brand-logo-text leading-none text-zinc-900 dark:text-zinc-100">
