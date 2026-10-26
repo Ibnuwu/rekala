@@ -1,8 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { QRCodeCanvas } from 'qrcode.react';
+import Link from 'next/link';
 import type { Archive } from '@/data/archives';
+import { ArchiveSticker } from './ArchiveSticker';
+import { downloadStickerPNG } from '@/lib/stickerExport';
 
 interface ShareModalProps {
   archive: Archive;
@@ -12,6 +14,7 @@ interface ShareModalProps {
 
 export function ShareModal({ archive, isOpen, onClose }: ShareModalProps) {
   const [copied, setCopied] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
   const shareUrl = `https://rekala-banten.vercel.app/arsip/${archive.id}`;
 
   // Close on Escape key press
@@ -38,16 +41,17 @@ export function ShareModal({ archive, isOpen, onClose }: ShareModalProps) {
 
   if (!isOpen) return null;
 
-  const handleDownloadQR = () => {
-    const canvas = document.getElementById('archive-qr-code') as HTMLCanvasElement;
-    if (!canvas) return;
-    const url = canvas.toDataURL('image/png');
-    const link = document.createElement('a');
-    link.download = `QR-REKALA-${archive.id}.png`;
-    link.href = url;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  // Exports the entire sticker card (Header + QR Code + ID Footer) as a high-DPI image canvas
+  const handleDownloadSticker = async () => {
+    try {
+      setIsDownloading(true);
+      const canvas = document.getElementById(`modal-sticker-qr-${archive.id}`) as HTMLCanvasElement | null;
+      await downloadStickerPNG(archive, canvas);
+    } catch (err) {
+      console.error('Failed to export sticker PNG:', err);
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   const handleCopyLink = async () => {
@@ -58,7 +62,7 @@ export function ShareModal({ archive, isOpen, onClose }: ShareModalProps) {
         success = true;
       }
     } catch {
-      // Fallback to legacy execCommand below
+      // Fallback below
     }
 
     if (!success) {
@@ -90,16 +94,16 @@ export function ShareModal({ archive, isOpen, onClose }: ShareModalProps) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-sm sm:max-w-md bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-2xl space-y-5 animate-in zoom-in-95 duration-200 text-zinc-900 dark:text-zinc-100 max-h-[90vh] overflow-y-auto"
+        className="relative w-full max-w-sm sm:max-w-md bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4 animate-in zoom-in-95 duration-200 text-zinc-900 dark:text-zinc-100 max-h-[92vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex items-start justify-between gap-4 pb-2 border-b border-zinc-100 dark:border-zinc-800">
           <div>
             <h2 id="share-modal-title" className="font-serif text-lg sm:text-xl font-semibold text-zinc-900 dark:text-zinc-100">
-              Bagikan Arsip Digital
+              Stiker QR & Bagikan Arsip
             </h2>
-            <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400 mt-0.5 truncate max-w-[260px] sm:max-w-[320px]">
+            <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400 mt-0.5 truncate max-w-[250px] sm:max-w-[320px]">
               {archive.id} &bull; {archive.title}
             </p>
           </div>
@@ -117,44 +121,31 @@ export function ShareModal({ archive, isOpen, onClose }: ShareModalProps) {
           </button>
         </div>
 
-        {/* QR Code Container (Crisp White Container for Reliable Scannability in both Light and Dark Modes) */}
-        <div className="flex flex-col items-center justify-center p-5 rounded-xl bg-white border border-zinc-200 shadow-inner">
-          <QRCodeCanvas
-            id="archive-qr-code"
-            value={shareUrl}
-            size={240}
-            level="H"
-            bgColor="#ffffff"
-            fgColor="#09090b"
-            marginSize={1}
-            imageSettings={{
-              src: '/logo/logo-warna.png',
-              height: 44,
-              width: 44,
-              excavate: true,
-            }}
-            className="w-44 h-44 sm:w-52 sm:h-52 object-contain"
+        {/* Vertical Sticker Layout Structure */}
+        <div className="py-1">
+          <ArchiveSticker
+            archive={archive}
+            variant="modal"
+            qrSize={200}
+            canvasIdPrefix="modal-sticker-qr"
           />
-
-          <span className="mt-3 text-[0.6875rem] font-mono text-zinc-500 text-center select-all break-all">
-            {shareUrl}
-          </span>
         </div>
 
         {/* Action Buttons */}
-        <div className="space-y-2.5 pt-1">
-          {/* Button 1: Download QR PNG */}
+        <div className="space-y-2 pt-1">
+          {/* Button 1: Download Sticker PNG (Full Card: Header + QR + Footer) */}
           <button
             type="button"
-            onClick={handleDownloadQR}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-zinc-950 transition-colors shadow-sm cursor-pointer"
+            onClick={handleDownloadSticker}
+            disabled={isDownloading}
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-zinc-950 transition-colors shadow-xs cursor-pointer disabled:opacity-70"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            <span>Unduh Kode QR (PNG)</span>
+            <span>{isDownloading ? 'Menyiapkan Kanvas...' : 'Unduh Stiker (PNG)'}</span>
           </button>
 
           {/* Button 2: Copy Link */}
@@ -172,7 +163,7 @@ export function ShareModal({ archive, isOpen, onClose }: ShareModalProps) {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-600 dark:text-emerald-400">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                <span className="font-semibold">Tautan Disalin!</span>
+                <span className="font-semibold">Tautan Berhasil Disalin!</span>
               </>
             ) : (
               <>
@@ -184,6 +175,26 @@ export function ShareModal({ archive, isOpen, onClose }: ShareModalProps) {
               </>
             )}
           </button>
+
+          {/* Button 3: Link to Bulk Sticker Exporter */}
+          <div className="pt-2 text-center border-t border-zinc-100 dark:border-zinc-800/80">
+            <Link
+              href="/admin/stickers"
+              onClick={onClose}
+              className="inline-flex items-center gap-1.5 text-[11px] font-medium text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 hover:underline transition-colors"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="6 9 6 2 18 2 18 9" />
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                <rect x="6" y="14" width="12" height="8" />
+              </svg>
+              <span>Buka Lembar Cetak Stiker Massal (Semua 21 Arsip)</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

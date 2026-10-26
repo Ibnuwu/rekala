@@ -160,7 +160,8 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
   }, [getAudioContext]);
 
   /* ──────────────── Camera Management (Single Stream Reused) ──────────────── */
-  const startCamera = useCallback(async () => {
+  const startCamera = useCallback(async (mode?: 'environment' | 'user') => {
+    const targetMode = mode || facingMode;
     setCameraError(null);
     try {
       if (!navigator.mediaDevices?.getUserMedia) {
@@ -172,7 +173,7 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
 
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
-          facingMode: { ideal: facingMode },
+          facingMode: { ideal: targetMode },
           width: { ideal: 1280 },
           height: { ideal: 720 },
         },
@@ -209,17 +210,12 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
   }, []);
 
   const flipCamera = useCallback(() => {
-    stopCamera();
-    setFacingMode((prev) => (prev === 'environment' ? 'user' : 'environment'));
-  }, [stopCamera]);
-
-  // Restart camera when facing mode toggled and was previously active
-  useEffect(() => {
+    const nextMode = facingMode === 'environment' ? 'user' : 'environment';
+    setFacingMode(nextMode);
     if (cameraActive) {
-      startCamera();
+      startCamera(nextMode);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [facingMode]);
+  }, [facingMode, cameraActive, startCamera]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -321,10 +317,16 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
     const ctx = c.getContext('2d');
     if (!ctx) return null;
 
+    // In selfie mode (front camera), horizontally mirror snapshot to match preview
+    if (facingMode === 'user') {
+      ctx.translate(c.width, 0);
+      ctx.scale(-1, 1);
+    }
+
     // Draw video snapshot without hardcoding filter so live filter switching remains fluid
     ctx.drawImage(video, 0, 0, c.width, c.height);
     return c.toDataURL('image/png');
-  }, []);
+  }, [facingMode]);
 
   const startPhotoSequence = useCallback(async () => {
     // Unlock Web Audio context on user gesture
@@ -340,13 +342,16 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
   // Countdown & auto 3-shot sequence
   useEffect(() => {
     if (!isCapturing || currentShot >= 3) {
-      if (currentShot >= 3) setIsCapturing(false);
       return;
     }
 
-    setCountdown(3);
     playBeep(880, 0.12);
     let count = 3;
+
+    // Asynchronously initialize countdown timer to prevent cascading render
+    const startTimer = setTimeout(() => {
+      setCountdown(3);
+    }, 0);
 
     const interval = setInterval(() => {
       count--;
@@ -360,9 +365,9 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
         // Shutter flash & procedural audio
         setShowFlash(true);
         playShutter();
-        const shotNumber = currentShot + 1;
-        setSnapToast(`FOTO [${shotNumber}/3] TERAMBIL!`);
-        setTimeout(() => setShowFlash(false), 100);
+        const nextShotNumber = currentShot + 1;
+        setSnapToast(`FOTO [${nextShotNumber}/3] TERAMBIL!`);
+        setTimeout(() => setShowFlash(false), 120);
         setTimeout(() => setSnapToast(null), 1200);
 
         // Take snapshot
@@ -370,11 +375,20 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
         if (dataUrl) {
           setPhotos((prev) => [...prev, dataUrl]);
         }
-        setCurrentShot((prev) => prev + 1);
+
+        if (nextShotNumber >= 3) {
+          setIsCapturing(false);
+          setCurrentShot(3);
+        } else {
+          setCurrentShot(nextShotNumber);
+        }
       }
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearTimeout(startTimer);
+      clearInterval(interval);
+    };
   }, [isCapturing, currentShot, capturePhoto, playShutter, playBeep]);
 
   const resetPhotobooth = () => {
@@ -435,7 +449,9 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
             playsInline
             muted
             autoPlay
-            className={`w-full h-full object-cover ${cameraActive ? 'block' : 'hidden'}`}
+            className={`w-full h-full object-cover transition-transform duration-200 ${
+              facingMode === 'user' ? '-scale-x-100' : ''
+            } ${cameraActive ? 'block' : 'hidden'}`}
             style={
               activeTab === 'photobooth' && cameraActive
                 ? { filter: FILTERS.find((f) => f.id === activeFilter)?.css || 'none' }
@@ -459,6 +475,23 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
             </div>
           )}
 
+          {/* Photobooth Composition Safe-Area Reticle */}
+          {activeTab === 'photobooth' && cameraActive && countdown === null && (
+            <div className="absolute inset-0 pointer-events-none flex items-center justify-center p-6 select-none">
+              <div className="relative w-full h-full max-w-sm max-h-72 border border-white/10 rounded-xl">
+                <div className="border-t-2 border-l-2 border-amber-400/70 w-3.5 h-3.5 absolute -top-0.5 -left-0.5 rounded-tl" />
+                <div className="border-t-2 border-r-2 border-amber-400/70 w-3.5 h-3.5 absolute -top-0.5 -right-0.5 rounded-tr" />
+                <div className="border-b-2 border-l-2 border-amber-400/70 w-3.5 h-3.5 absolute -bottom-0.5 -left-0.5 rounded-bl" />
+                <div className="border-b-2 border-r-2 border-amber-400/70 w-3.5 h-3.5 absolute -bottom-0.5 -right-0.5 rounded-br" />
+                {/* Subtle center tick */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-25">
+                  <div className="w-4 h-px bg-amber-400" />
+                  <div className="h-4 w-px bg-amber-400 absolute" />
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* QR Scanned Success Feedback */}
           {activeTab === 'qr' && scannedResult && (
             <div className="absolute inset-0 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-10">
@@ -476,9 +509,9 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
 
           {/* Modern Glassmorphism HUD Countdown Timer */}
           {activeTab === 'photobooth' && countdown !== null && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-zinc-950/40 backdrop-blur-sm z-30 pointer-events-none animate-fadeIn">
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-zinc-950/45 backdrop-blur-sm z-30 pointer-events-none animate-fadeIn">
               {/* Upper Slot Indicator Badge */}
-              <div className="mb-3 px-3.5 py-1 rounded-full bg-amber-950/70 border border-amber-500/40 backdrop-blur-md shadow-lg shadow-amber-950/50 flex items-center gap-1.5">
+              <div className="mb-3 px-3.5 py-1 rounded-full bg-amber-950/80 border border-amber-500/50 backdrop-blur-md shadow-lg shadow-amber-950/60 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
                 <span className="text-[10px] font-mono uppercase tracking-widest text-amber-300 font-bold">
                   FOTO [{currentShot + 1}/3]
@@ -505,20 +538,23 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
                     strokeDasharray={2 * Math.PI * 54}
                     strokeDashoffset={2 * Math.PI * 54 * (1 - (countdown ?? 3) / 3)}
                     style={{
-                      filter: 'drop-shadow(0 0 8px rgba(251, 191, 36, 0.7))',
+                      filter: 'drop-shadow(0 0 10px rgba(251, 191, 36, 0.8))',
                     }}
                   />
                 </svg>
 
-                {/* Centered Typography */}
+                {/* Centered Typography with Animated Pop per Tick */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-6xl font-bold tracking-tighter text-amber-400 drop-shadow-[0_0_20px_rgba(251,191,36,0.6)] animate-pulse select-none">
+                  <span
+                    key={countdown}
+                    className="text-6xl font-black tracking-tighter text-amber-400 drop-shadow-[0_0_25px_rgba(251,191,36,0.85)] select-none animate-[ping_0.35s_cubic-bezier(0,0,0.2,1)_1]"
+                  >
                     {countdown}
                   </span>
                 </div>
               </div>
 
-              <span className="text-[9px] font-mono tracking-widest text-zinc-300 mt-3 uppercase opacity-80">
+              <span className="text-[9px] font-mono tracking-widest text-zinc-200 mt-3 uppercase font-semibold drop-shadow-sm">
                 SENYUM &bull; BERGAYA
               </span>
             </div>
@@ -716,26 +752,54 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
 
             {/* Action Button: MULAI BERFOTO (3 KALI) */}
             {photos.length < 3 && !isCapturing && (
-              <button
-                type="button"
-                onClick={startPhotoSequence}
-                className="bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold px-8 py-3.5 rounded-full shadow-lg transition-all flex items-center gap-2.5 mx-auto cursor-pointer active:scale-95 hover:shadow-amber-500/25"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                  <circle cx="12" cy="13" r="4" />
-                </svg>
-                <span>Mulai Berfoto (3 Kali)</span>
-              </button>
+              <div className="flex flex-col items-center gap-2">
+                <button
+                  type="button"
+                  onClick={startPhotoSequence}
+                  className="bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold px-8 py-3.5 rounded-full shadow-lg transition-all flex items-center gap-2.5 mx-auto cursor-pointer active:scale-95 hover:shadow-amber-500/25 hover:scale-105"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                    <circle cx="12" cy="13" r="4" />
+                  </svg>
+                  <span>Mulai Berfoto (3 Kali)</span>
+                </button>
+                {photos.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={resetPhotobooth}
+                    className="text-[11px] font-medium text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300 underline underline-offset-4 cursor-pointer"
+                  >
+                    Reset & foto dari awal
+                  </button>
+                )}
+              </div>
             )}
 
-            {/* Capturing status indicator */}
+            {/* Capturing status indicator & Cancel button */}
             {isCapturing && (
-              <div className="flex items-center justify-center gap-2 text-xs font-mono text-amber-600 dark:text-amber-400 animate-pulse py-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping" />
-                <span className="font-semibold tracking-wide">
-                  Sesi Berfoto Sedang Berlangsung ({Math.min(currentShot + 1, 3)} / 3)
-                </span>
+              <div className="flex flex-col items-center gap-2.5 py-1">
+                <div className="flex items-center justify-center gap-2 text-xs font-mono text-amber-600 dark:text-amber-400 animate-pulse">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping" />
+                  <span className="font-semibold tracking-wide">
+                    Sesi Berfoto Sedang Berlangsung ({Math.min(currentShot + 1, 3)} / 3)
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={resetPhotobooth}
+                  className="px-4 py-1.5 rounded-full text-xs font-semibold text-rose-500 hover:text-rose-400 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 transition-all cursor-pointer"
+                >
+                  Batalkan Sesi
+                </button>
+              </div>
+            )}
+
+            {/* Completed state hint */}
+            {photos.length >= 3 && !isCapturing && (
+              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-300 text-xs text-center flex items-center gap-2">
+                <span className="text-base leading-none">✓</span>
+                <span className="font-medium">3 Foto Selesai! Pilih tema bingkai dan unduh photo strip di sebelah kanan.</span>
               </div>
             )}
           </div>

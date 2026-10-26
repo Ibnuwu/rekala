@@ -417,3 +417,30 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* ── Print Optimization (@media print) ── */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 8mm 8mm 8mm;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  header,
+  footer,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+  main {
+    padding-top: 0 !important;
+    margin: 0 !important;
+  }
+  .page-break {
+    page-break-after: always;
+    break-after: page;
+  }
+}
+
