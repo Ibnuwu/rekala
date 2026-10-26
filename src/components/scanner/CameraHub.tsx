@@ -577,7 +577,7 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
               </div>
               <button
                 type="button"
-                onClick={startCamera}
+                onClick={() => startCamera()}
                 className="px-6 py-3 text-xs sm:text-sm font-semibold tracking-wide bg-amber-500 hover:bg-amber-400 text-zinc-950 hover:shadow-lg hover:shadow-amber-500/20 transition-all rounded-full flex items-center justify-center gap-2 cursor-pointer"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

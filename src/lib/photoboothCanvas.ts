@@ -143,7 +143,7 @@ function loadImg(src: string): Promise<HTMLImageElement> {
 /**
  * Safe cross-browser rounded rectangle path helper for canvas clipping and drawing
  */
-function drawRoundedRectPath(
+function drawRoundRect(
   ctx: CanvasRenderingContext2D,
   x: number,
   y: number,
@@ -152,16 +152,20 @@ function drawRoundedRectPath(
   r: number
 ) {
   ctx.beginPath();
-  if (typeof ctx.roundRect === 'function') {
-    ctx.roundRect(x, y, w, h, r);
+  if (typeof (ctx as unknown as { roundRect?: Function }).roundRect === 'function') {
+    (ctx as unknown as { roundRect: Function }).roundRect(x, y, w, h, r);
   } else {
     ctx.moveTo(x + r, y);
-    ctx.arcTo(x + w, y, x + w, y + h, r);
-    ctx.arcTo(x + w, y + h, x, y + h, r);
-    ctx.arcTo(x, y + h, x, y, r);
-    ctx.arcTo(x, y, x + w, y, r);
-    ctx.closePath();
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
   }
+  ctx.closePath();
 }
 
 
@@ -516,7 +520,7 @@ export async function renderArchiveMemoryCanvas({
       ctx.shadowColor = 'rgba(0, 0, 0, 0.28)';
       ctx.shadowBlur = 18;
       ctx.shadowOffsetY = 6;
-      drawRoundedRectPath(ctx, photoX - 8, y - 8, photoW + 16, photoH + 16, 22);
+      drawRoundRect(ctx, photoX - 8, y - 8, photoW + 16, photoH + 16, 22);
       ctx.fill();
       ctx.restore();
     } else if (themeId === 'parchment') {
@@ -526,7 +530,7 @@ export async function renderArchiveMemoryCanvas({
       ctx.shadowColor = 'rgba(60, 40, 20, 0.08)';
       ctx.shadowBlur = 14;
       ctx.shadowOffsetY = 4;
-      drawRoundedRectPath(ctx, photoX, y, photoW, photoH, slotRadius);
+      drawRoundRect(ctx, photoX, y, photoW, photoH, slotRadius);
       ctx.fill();
 
       // Subtle paper-emboss border
@@ -541,7 +545,7 @@ export async function renderArchiveMemoryCanvas({
       ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
       ctx.shadowBlur = 12;
       ctx.shadowOffsetY = 4;
-      drawRoundedRectPath(ctx, photoX - 3, y - 3, photoW + 6, photoH + 6, slotRadius);
+      drawRoundRect(ctx, photoX - 3, y - 3, photoW + 6, photoH + 6, slotRadius);
       ctx.fill();
       ctx.strokeStyle = 'rgba(251, 191, 36, 0.2)';
       ctx.lineWidth = 1;
@@ -571,7 +575,7 @@ export async function renderArchiveMemoryCanvas({
 
         // Before drawing each photo, apply strict clipping:
         ctx.save();
-        drawRoundedRectPath(ctx, photoX, y, photoW, photoH, slotRadius); // exact slot radius (16)
+        drawRoundRect(ctx, photoX, y, photoW, photoH, slotRadius); // exact slot radius (16)
         ctx.clip(); // Locks drawing strictly inside the slot bounds
 
         if (filterCss !== 'none') {
@@ -583,7 +587,7 @@ export async function renderArchiveMemoryCanvas({
         ctx.restore(); // Restores context state cleanly
       } catch {
         ctx.save();
-        drawRoundedRectPath(ctx, photoX, y, photoW, photoH, slotRadius);
+        drawRoundRect(ctx, photoX, y, photoW, photoH, slotRadius);
         ctx.clip();
         ctx.fillStyle = '#27272a';
         ctx.fillRect(photoX, y, photoW, photoH);
@@ -592,7 +596,7 @@ export async function renderArchiveMemoryCanvas({
     } else {
       // Empty slot placeholder
       ctx.save();
-      drawRoundedRectPath(ctx, photoX, y, photoW, photoH, slotRadius);
+      drawRoundRect(ctx, photoX, y, photoW, photoH, slotRadius);
       ctx.clip();
       ctx.fillStyle = themeId === 'parchment' ? '#f5eee6' : '#27272a';
       ctx.fillRect(photoX, y, photoW, photoH);
@@ -613,8 +617,7 @@ export async function renderArchiveMemoryCanvas({
       // Retro indie magazine badge
       ctx.save();
       ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
-      ctx.beginPath();
-      ctx.roundRect(photoX + 12, y + 12, 74, 18, 9);
+      drawRoundRect(ctx, photoX + 12, y + 12, 74, 18, 9);
       ctx.fill();
       ctx.fillStyle = '#ffffff';
       ctx.font = '800 8.5px -apple-system, sans-serif';
