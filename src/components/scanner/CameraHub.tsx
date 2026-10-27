@@ -70,7 +70,7 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
   const [showFlash, setShowFlash] = useState(false);
   const [snapToast, setSnapToast] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState<PhotoboothFilterId>('normal');
-  const [selectedTheme, setSelectedTheme] = useState<FrameThemeId>('parchment');
+  const [selectedTheme, setSelectedTheme] = useState<FrameThemeId>('kertas_kuno');
 
   /* ──────────────── Audio Helpers (Procedural Web Audio API) ──────────────── */
   const audioCtxRef = useRef<AudioContext | null>(null);
@@ -454,7 +454,12 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
             } ${cameraActive ? 'block' : 'hidden'}`}
             style={
               activeTab === 'photobooth' && cameraActive
-                ? { filter: FILTERS.find((f) => f.id === activeFilter)?.css || 'none' }
+                ? {
+                    filter:
+                      selectedTheme === 'roll_film'
+                        ? 'grayscale(100%) contrast(120%)'
+                        : (FILTERS.find((f) => f.id === activeFilter)?.css || 'none'),
+                  }
                 : undefined
             }
           />
@@ -507,55 +512,17 @@ export function CameraHub({ sampleArchives }: CameraHubProps) {
             </div>
           )}
 
-          {/* Modern Glassmorphism HUD Countdown Timer */}
+          {/* Redesigned Countdown Timer (Clean & Modern HUD) */}
           {activeTab === 'photobooth' && countdown !== null && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-zinc-950/45 backdrop-blur-sm z-30 pointer-events-none animate-fadeIn">
-              {/* Upper Slot Indicator Badge */}
-              <div className="mb-3 px-3.5 py-1 rounded-full bg-amber-950/80 border border-amber-500/50 backdrop-blur-md shadow-lg shadow-amber-950/60 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-                <span className="text-[10px] font-mono uppercase tracking-widest text-amber-300 font-bold">
-                  FOTO [{currentShot + 1}/3]
-                </span>
-              </div>
-
-              {/* Modern Circular Ring Gauge */}
-              <div className="w-32 h-32 relative flex items-center justify-center">
-                <svg className="w-full h-full -rotate-90 transform" viewBox="0 0 128 128">
-                  <circle
-                    cx="64"
-                    cy="64"
-                    r="54"
-                    className="stroke-amber-400/20 fill-none"
-                    strokeWidth="6"
-                  />
-                  <circle
-                    cx="64"
-                    cy="64"
-                    r="54"
-                    className="stroke-amber-400 fill-none transition-all duration-1000 ease-linear"
-                    strokeWidth="6"
-                    strokeLinecap="round"
-                    strokeDasharray={2 * Math.PI * 54}
-                    strokeDashoffset={2 * Math.PI * 54 * (1 - (countdown ?? 3) / 3)}
-                    style={{
-                      filter: 'drop-shadow(0 0 10px rgba(251, 191, 36, 0.8))',
-                    }}
-                  />
-                </svg>
-
-                {/* Centered Typography with Animated Pop per Tick */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span
-                    key={countdown}
-                    className="text-6xl font-black tracking-tighter text-amber-400 drop-shadow-[0_0_25px_rgba(251,191,36,0.85)] select-none animate-[ping_0.35s_cubic-bezier(0,0,0.2,1)_1]"
-                  >
-                    {countdown}
-                  </span>
-                </div>
-              </div>
-
-              <span className="text-[9px] font-mono tracking-widest text-zinc-200 mt-3 uppercase font-semibold drop-shadow-sm">
-                SENYUM &bull; BERGAYA
+            <div className="bg-black/40 backdrop-blur-sm inset-0 absolute z-30 flex flex-col items-center justify-center pointer-events-none">
+              <span
+                key={countdown}
+                className="text-7xl font-light text-white tracking-tighter animate-pulse select-none"
+              >
+                {countdown}
+              </span>
+              <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-white/70 mt-3 font-medium">
+                SHOT {currentShot + 1} / 3
               </span>
             </div>
           )}
