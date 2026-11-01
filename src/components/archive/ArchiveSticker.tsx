@@ -48,7 +48,7 @@ export function ArchiveSticker({
   if (variant === 'sheet') {
     return (
       <div
-        className={`relative group bg-white border border-dashed border-zinc-300 print:border-zinc-400 p-3 sm:p-3.5 rounded-xl flex flex-col items-center justify-between text-center transition-all break-inside-avoid print:break-inside-avoid shadow-2xs print:shadow-none aspect-[3/4] max-w-[215px] mx-auto w-full ${className}`}
+        className={`relative group bg-white border border-dashed border-zinc-300 print:border-zinc-400 rounded-lg flex flex-col items-center text-center transition-all break-inside-avoid print:break-inside-avoid shadow-2xs print:shadow-none aspect-square max-w-[190px] mx-auto w-full p-2 ${className}`}
       >
         {/* Subtle Physical Crop Marks for Manual Trimming */}
         {showCropMarks && (
@@ -72,18 +72,18 @@ export function ArchiveSticker({
           </>
         )}
 
-        {/* Compact Top Header */}
-        <div className="w-full text-center space-y-0.5 pt-0.5">
-          <h4 className="font-serif text-[13px] sm:text-sm font-bold text-zinc-900 tracking-wider uppercase leading-none">
+        {/* Compact Top Header — tight, no extra spacing */}
+        <div className="w-full text-center leading-none">
+          <h4 className="font-serif text-[12px] sm:text-[13px] font-bold text-zinc-900 tracking-wider uppercase leading-none">
             REKALA
           </h4>
-          <p className="text-[7.5px] sm:text-[8px] text-zinc-500 tracking-widest font-sans uppercase leading-none mt-0.5">
+          <p className="text-[6.5px] sm:text-[7px] text-zinc-500 tracking-[0.18em] font-sans uppercase leading-none mt-px">
             ARSIP DIGITAL BANTEN
           </p>
         </div>
 
-        {/* Center Maximized QR Focus with Quiet-Zone */}
-        <div className="p-1.5 sm:p-2 bg-white rounded-lg shadow-2xs border border-zinc-200/90 relative inline-flex items-center justify-center my-auto">
+        {/* QR Code — fills core square area with minimal padding */}
+        <div className="relative inline-flex items-center justify-center flex-1 w-full mt-1">
           <QRCodeCanvas
             id={canvasId}
             value={shareUrl}
@@ -118,12 +118,10 @@ export function ArchiveSticker({
           </div>
         </div>
 
-        {/* Compact Bottom Footer ID Badge directly under QR */}
-        <div className="w-full flex flex-col items-center pb-0.5">
-          <span className="font-mono text-[11px] sm:text-xs font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-md leading-tight">
-            {formattedId}
-          </span>
-        </div>
+        {/* Footer Badge — tucked tight to bottom edge */}
+        <span className="font-mono text-[9px] sm:text-[10px] font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2 py-px rounded leading-tight mt-0.5">
+          {formattedId}
+        </span>
 
         {/* Action Button for Individual Download (Hover only, hidden during print) */}
         {showDownloadButton && (
@@ -131,7 +129,7 @@ export function ArchiveSticker({
             type="button"
             onClick={handleDownload}
             disabled={downloading}
-            className="no-print absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-semibold text-zinc-700 hover:text-amber-700 bg-white hover:bg-amber-50 border border-zinc-200 hover:border-amber-300 p-1 rounded-md shadow-xs flex items-center gap-1 cursor-pointer"
+            className="no-print absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-semibold text-zinc-700 hover:text-amber-700 bg-white hover:bg-amber-50 border border-zinc-200 hover:border-amber-300 p-1 rounded-md shadow-xs flex items-center gap-1 cursor-pointer"
             title="Download stiker ini saja (PNG)"
             aria-label="Download stiker ini"
           >

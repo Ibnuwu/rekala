@@ -6,8 +6,9 @@ import { archives } from '@/data/archives';
 import { ArchiveSticker } from '@/components/archive/ArchiveSticker';
 import { downloadAllStickersZip } from '@/lib/stickerExport';
 
-// Group archives into chunks of 9 stickers (3 columns x 3 rows) per standard A4 sheet
-const STICKERS_PER_PAGE = 9;
+// Group archives into chunks of 16 stickers (4 columns x 4 rows) per standard A4 sheet
+// Square stickers pack tighter than 3:4 ratio cards
+const STICKERS_PER_PAGE = 16;
 
 function chunkArray<T>(array: T[], size: number): T[][] {
   const chunks: T[][] = [];
@@ -84,7 +85,7 @@ export default function AdminStickersPage() {
                 Lembar Cetak Stiker QR Arsip REKALA
               </h1>
               <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1 max-w-2xl">
-                Format stiker vertikal kompak (~3:4) siap cetak ukuran standar A4 dengan crop marks
+                Format stiker persegi kompak (1:1) siap cetak ukuran standar A4 dengan crop marks
                 dan QR code resolusi tinggi (Tingkat Koreksi Kesalahan &apos;H&apos;).
               </p>
             </div>
@@ -162,7 +163,7 @@ export default function AdminStickersPage() {
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                   <polyline points="14 2 14 8 20 8" />
                 </svg>
-                <span>Simulasi Lembar A4 (9 / lembar)</span>
+                <span>Simulasi Lembar A4 (16 / lembar)</span>
               </button>
               <button
                 type="button"
@@ -203,14 +204,14 @@ export default function AdminStickersPage() {
               </div>
 
               {/* Standard A4 Paper Canvas: Pure clean white for printing & export */}
-              <div className="page-break bg-white text-zinc-900 shadow-md print:shadow-none border border-zinc-200 dark:border-zinc-800/80 rounded-xl print:rounded-none print:border-none p-6 sm:p-8 max-w-[210mm] mx-auto">
-                <div className="grid grid-cols-3 gap-5 sm:gap-6">
+              <div className="page-break bg-white text-zinc-900 shadow-md print:shadow-none border border-zinc-200 dark:border-zinc-800/80 rounded-xl print:rounded-none print:border-none p-4 sm:p-5 max-w-[210mm] mx-auto">
+                <div className="grid grid-cols-4 gap-3">
                   {sheetArchives.map((archive) => (
                     <ArchiveSticker
                       key={archive.id}
                       archive={archive}
                       variant="sheet"
-                      qrSize={145}
+                      qrSize={130}
                       canvasIdPrefix="sticker-qr"
                       showCropMarks={true}
                       showDownloadButton={true}
@@ -221,15 +222,15 @@ export default function AdminStickersPage() {
             </div>
           ))
         ) : (
-          // Continuous 3-Column Grid
-          <div className="bg-white text-zinc-900 shadow-md print:shadow-none border border-zinc-200 dark:border-zinc-800/80 rounded-xl print:rounded-none print:border-none p-6 sm:p-8 max-w-[210mm] mx-auto">
-            <div className="grid grid-cols-3 gap-5 sm:gap-6">
+          // Continuous 4-Column Grid
+          <div className="bg-white text-zinc-900 shadow-md print:shadow-none border border-zinc-200 dark:border-zinc-800/80 rounded-xl print:rounded-none print:border-none p-4 sm:p-5 max-w-[210mm] mx-auto">
+            <div className="grid grid-cols-4 gap-3">
               {filteredArchives.map((archive) => (
                 <ArchiveSticker
                   key={archive.id}
                   archive={archive}
                   variant="sheet"
-                  qrSize={145}
+                  qrSize={130}
                   canvasIdPrefix="sticker-qr"
                   showCropMarks={true}
                   showDownloadButton={true}

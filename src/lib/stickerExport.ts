@@ -57,7 +57,7 @@ function loadImage(src: string): Promise<HTMLImageElement> {
 }
 
 /**
- * Generates a compact ~3:4 aspect ratio (600x800) print-ready sticker canvas
+ * Generates a compact 1:1 square aspect ratio (600x600) print-ready sticker canvas
  * with maximized QR code, compact header, and tight footer badge.
  */
 export async function generateStickerCanvas(
@@ -65,9 +65,9 @@ export async function generateStickerCanvas(
   qrCanvasElement?: HTMLCanvasElement | null
 ): Promise<HTMLCanvasElement> {
   const canvas = document.createElement('canvas');
-  // Strict 3:4 compact sticker ratio
+  // Strict 1:1 compact square sticker
   const width = 600;
-  const height = 800;
+  const height = 600;
   canvas.width = width;
   canvas.height = height;
 
@@ -91,49 +91,43 @@ export async function generateStickerCanvas(
   ctx.save();
   ctx.strokeStyle = '#E4E4E7';
   ctx.lineWidth = 2.5;
-  drawRoundedRect(ctx, 12, 12, width - 24, height - 24, 20);
+  drawRoundedRect(ctx, 10, 10, width - 20, height - 20, 16);
   ctx.stroke();
   ctx.restore();
 
-  // 3. Compact Header Section
+  // 3. Compact Header Section — proportionally scaled to match web preview
+  // Web card is ~190px, canvas is 600px → scale factor ~3.15×
   ctx.save();
   ctx.textAlign = 'center';
   ctx.textBaseline = 'alphabetic';
 
-  // Title: "REKALA"
-  ctx.font = 'bold 32px "Playfair Display", "Cinzel", Georgia, serif';
+  // Title: "REKALA" — web: 13px bold serif → canvas: ~38px
+  ctx.font = 'bold 38px "Playfair Display", "Cinzel", Georgia, serif';
   ctx.fillStyle = '#18181B'; // text-zinc-900
-  ctx.fillText('REKALA', width / 2, 58);
+  ctx.letterSpacing = '3px';
+  ctx.fillText('REKALA', width / 2, 52);
+  ctx.letterSpacing = '0px';
 
-  // Subtitle: "ARSIP DIGITAL BANTEN"
-  ctx.font = '700 10px "Plus Jakarta Sans", Inter, -apple-system, sans-serif';
+  // Subtitle: "ARSIP DIGITAL BANTEN" — web: 7px → canvas: ~14px
+  ctx.font = '500 14px "Plus Jakarta Sans", Inter, -apple-system, sans-serif';
   ctx.fillStyle = '#71717A'; // text-zinc-500
-  ctx.fillText('A R S I P   D I G I T A L   B A N T E N', width / 2, 80);
-
-  // Subtle separator line
-  ctx.fillStyle = '#E4E4E7';
-  ctx.fillRect((width - 90) / 2, 94, 90, 1.5);
+  ctx.fillText('A R S I P   D I G I T A L   B A N T E N', width / 2, 72);
   ctx.restore();
 
-  // 4. Center Focus (Maximized QR Code with Quiet Zone)
-  // Large quiet zone box occupying dominant area of the 3:4 card
-  const quietZoneSize = 510;
-  const quietZoneX = (width - quietZoneSize) / 2;
-  const quietZoneY = 112;
+  // 4. Center Focus (Maximized QR Code — fills most of the square)
+  // Tight spacing: header ends ~72px, badge needs ~56px at bottom
+  const qrAreaTop = 82;
+  const qrAreaBottom = height - 64; // leave room for footer badge
+  const qrAreaHeight = qrAreaBottom - qrAreaTop;
+  const qrAreaSize = Math.min(width - 40, qrAreaHeight);
+  const qrAreaX = (width - qrAreaSize) / 2;
+  const qrAreaY = qrAreaTop;
 
-  ctx.save();
-  ctx.fillStyle = '#FFFFFF';
-  ctx.strokeStyle = '#E4E4E7';
-  ctx.lineWidth = 2;
-  drawRoundedRect(ctx, quietZoneX, quietZoneY, quietZoneSize, quietZoneSize, 20);
-  ctx.fill();
-  ctx.stroke();
-
-  // Maximized QR code inside quiet zone
-  const qrPadding = 18;
-  const qrSize = quietZoneSize - qrPadding * 2; // 474px
-  const qrX = quietZoneX + qrPadding;
-  const qrY = quietZoneY + qrPadding;
+  // QR code drawn directly — no extra quiet-zone border box
+  const qrPadding = 10;
+  const qrSize = qrAreaSize - qrPadding * 2;
+  const qrX = qrAreaX + qrPadding;
+  const qrY = qrAreaY + qrPadding;
 
   if (qrCanvasElement) {
     ctx.imageSmoothingEnabled = false;
@@ -141,7 +135,7 @@ export async function generateStickerCanvas(
   }
 
   // Center Emblem Badge Overlay inside QR (19% width)
-  const emblemBadgeSize = Math.round(qrSize * 0.19); // ~90px
+  const emblemBadgeSize = Math.round(qrSize * 0.19);
   const emblemBadgeX = qrX + (qrSize - emblemBadgeSize) / 2;
   const emblemBadgeY = qrY + (qrSize - emblemBadgeSize) / 2;
 
@@ -149,14 +143,14 @@ export async function generateStickerCanvas(
   ctx.fillStyle = '#FFFFFF';
   ctx.strokeStyle = '#E4E4E7';
   ctx.lineWidth = 2;
-  drawRoundedRect(ctx, emblemBadgeX, emblemBadgeY, emblemBadgeSize, emblemBadgeSize, 12);
+  drawRoundedRect(ctx, emblemBadgeX, emblemBadgeY, emblemBadgeSize, emblemBadgeSize, 10);
   ctx.fill();
   ctx.stroke();
 
   // Draw REKALA emblem logo
   try {
     const emblemImg = await loadImage('/logo/logo-warna.png');
-    const innerPadding = 8;
+    const innerPadding = 6;
     const innerSize = emblemBadgeSize - innerPadding * 2;
     ctx.drawImage(
       emblemImg,
@@ -167,43 +161,34 @@ export async function generateStickerCanvas(
     );
   } catch {
     ctx.fillStyle = '#D97706';
-    ctx.font = 'bold 36px "Cinzel", serif';
+    ctx.font = 'bold 32px "Cinzel", serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText('R', emblemBadgeX + emblemBadgeSize / 2, emblemBadgeY + emblemBadgeSize / 2);
   }
-  ctx.restore();
 
-  // 5. Compact Footer ID Badge directly under QR
+  // 5. Compact Footer ID Badge — tucked neatly under QR code
   ctx.save();
   const formattedId = formatArchiveId(archive.id);
-  const badgeWidth = 220;
-  const badgeHeight = 48;
+  const badgeWidth = 200;
+  const badgeHeight = 40;
   const badgeX = (width - badgeWidth) / 2;
-  const badgeY = 648;
+  const badgeY = height - 56;
 
-  // Monospace Amber Badge
+  // Monospace Amber Badge — web: px-2 py-px → canvas: px-16 py-6
   ctx.fillStyle = '#FEF3C7'; // amber-50
   ctx.strokeStyle = '#FDE68A'; // amber-200
   ctx.lineWidth = 2;
-  drawRoundedRect(ctx, badgeX, badgeY, badgeWidth, badgeHeight, 10);
+  drawRoundedRect(ctx, badgeX, badgeY, badgeWidth, badgeHeight, 8);
   ctx.fill();
   ctx.stroke();
 
-  // Badge Text
+  // Badge Text — web: 10px bold mono → canvas: ~20px
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.font = 'bold 22px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace';
+  ctx.font = 'bold 20px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace';
   ctx.fillStyle = '#92400E'; // amber-800
   ctx.fillText(formattedId, width / 2, badgeY + badgeHeight / 2 + 1);
-
-  // Micro brand subtext
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'alphabetic';
-  ctx.font = '600 11px ui-monospace, monospace';
-  ctx.fillStyle = '#A1A1AA';
-  ctx.fillText('rekala-banten.vercel.app', width / 2, 730);
-
   ctx.restore();
 
   return canvas;
