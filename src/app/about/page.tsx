@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { TEAM_MEMBERS, MENTORS } from '@/data/team';
+import { TEAM_MEMBERS } from '@/data/team';
 import { TeamMemberCard } from '@/components/ui/TeamMemberCard';
+import { Mentors } from '@/components/about/Mentors';
 
 export const metadata: Metadata = {
   title: 'Tentang REKALA — Layanan Arsip Digital | OJT BBPVP Serang',
@@ -98,51 +99,26 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Struktur Tim REKALA — Dedicated Sub-Sections */}
-        <div className="my-16 lg:my-24 space-y-14 sm:space-y-16">
-          {/* Section 1: Tim Inti Pelaksana (7 Anggota) */}
-          <section className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]">
-              <div>
-                <span className="badge-gold mb-2">Kolaborator</span>
-                <h2 className="font-serif text-2xl sm:text-3xl text-[var(--text-title)] font-normal">
-                  Tim Inti Pelaksana
-                </h2>
-              </div>
-              <span className="font-mono text-xs text-[var(--text-secondary)]">
-                7 Anggota &bull; Proyek OJT BBPVP Serang
-              </span>
-            </div>
-
-            {/* Compact grid: 2 cols mobile, 3 cols sm, 4 cols md+ */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-              {TEAM_MEMBERS.map((member) => (
-                <TeamMemberCard key={member.id} member={member} />
+        {/* Tim Pelaksana & Pembimbing — Minimalist & Compact */}
+        <div className="my-14 lg:my-20 max-w-4xl mx-auto">
+          {/* Section 1: Tim Pelaksana (7 Anggota, 3 Kolom) */}
+          <section>
+            <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-4 text-left">
+              Tim Pelaksana
+            </h2>
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 max-w-4xl mx-auto text-center">
+              {TEAM_MEMBERS.map((member, index) => (
+                <TeamMemberCard
+                  key={member.id}
+                  member={member}
+                  className={index === 6 ? 'col-start-2' : ''}
+                />
               ))}
             </div>
           </section>
 
-          {/* Section 2: Pembimbing & Pendamping OJT (2 Pembimbing) */}
-          <section className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-4 border-b border-[var(--border-subtle)]">
-              <div>
-                <span className="badge-gold mb-2">Bimbingan Teknis</span>
-                <h2 className="font-serif text-2xl sm:text-3xl text-[var(--text-title)] font-normal">
-                  Pembimbing &amp; Pendamping OJT
-                </h2>
-              </div>
-              <span className="font-mono text-xs text-[var(--text-secondary)]">
-                Dinas Perpustakaan dan Kearsipan Provinsi Banten
-              </span>
-            </div>
-
-            {/* Centered 2-card grid */}
-            <div className="grid grid-cols-2 max-w-lg mx-auto gap-4 mt-6">
-              {MENTORS.map((mentor) => (
-                <TeamMemberCard key={mentor.id} member={mentor} isMentor />
-              ))}
-            </div>
-          </section>
+          {/* Section 2: Pembimbing & Pendamping OJT (3 Pembimbing, 3 Kolom) */}
+          <Mentors />
         </div>
       </div>
     </div>

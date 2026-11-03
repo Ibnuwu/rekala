@@ -101,33 +101,34 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
 ];
 
-export const MENTORS: TeamMember[] = [
+export interface Mentor {
+  name: string;
+  role: string;
+  institution: string;
+  image: string;
+}
+
+export const mentors: Mentor[] = [
   {
-    id: 'asep',
-    name: 'Asep, S.SUI.',
-    role: 'Pendamping OJT — DPK Banten',
-    roleCategory: 'Pembimbing',
-    badge: 'Pembimbing Instansi',
-    photo: {
-      src: '/team/placeholder-mentor.jpg',
-      alt: 'Foto Asep, S.STP. — Pendamping OJT',
-      width: 800,
-      height: 1000,
-    },
+    name: 'Sigit Wardoyo, S.Si.',
+    role: 'Pendamping OJT',
+    institution: 'Perpusda Banten',
+    image: '/images/mentors/sigit-wardoyo.jpg', // Placeholder path
   },
   {
-    id: 'sigit',
-    name: 'Sigit, S.Sos.',
-
-    role: 'Pendamping OJT — Perpusda Banten',
-    roleCategory: 'Pembimbing',
-    badge: 'Pembimbing Instansi',
-    photo: {
-      src: '/team/placeholder-mentor.jpg',
-      alt: 'Foto Sigit, S.Sos. — Pendamping OJT',
-      width: 800,
-      height: 1000,
-    },
+    name: 'Asep Nureka, S.KM., M.M.',
+    role: 'Pendamping OJT',
+    institution: 'DPK Banten',
+    image: '/images/mentors/asep-nureka.jpg', // Placeholder path
+  },
+  {
+    name: 'Aziz Fauzi, M.Pd.',
+    role: 'Instruktur',
+    institution: 'BBPVP Serang',
+    image: '/images/mentors/aziz-fauzi.jpg', // Placeholder path
   },
 ];
+
+// Alias for uppercase convention compatibility
+export const MENTORS = mentors;
 
