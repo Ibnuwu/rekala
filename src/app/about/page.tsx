@@ -103,7 +103,7 @@ export default function AboutPage() {
         <div className="my-14 lg:my-20 max-w-4xl mx-auto">
           {/* Section 1: Tim Pelaksana (7 Anggota, 3 Kolom) */}
           <section>
-            <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-4 text-left">
+            <h2 className="text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-3 text-left">
               Tim Pelaksana
             </h2>
             <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 max-w-4xl mx-auto text-center">

@@ -46,11 +46,11 @@ export function TeamMemberCard({ member, className = '' }: TeamMemberCardProps) 
       </div>
 
       {/* Tight vertical text container without awkward min-height gap */}
-      <div className="mt-2 flex flex-col items-center justify-start text-center">
-        <h3 className="text-xs sm:text-sm font-semibold leading-tight text-zinc-900 dark:text-zinc-100 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+      <div className="mt-1.5 flex flex-col items-center justify-start text-center">
+        <h3 className="text-[11px] sm:text-sm md:text-base font-semibold leading-tight text-zinc-900 dark:text-zinc-100 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
           {member.name}
         </h3>
-        <p className="text-[10px] sm:text-xs text-zinc-500 font-medium leading-tight mt-0.5">
+        <p className="text-[9px] sm:text-xs text-zinc-500 font-medium leading-tight mt-0.5">
           {member.role}
         </p>
       </div>
