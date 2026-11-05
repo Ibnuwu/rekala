@@ -44,7 +44,7 @@ export default function AboutPage() {
           </div>
 
           <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed font-light font-sans">
-            REKALA adalah layanan arsip digital yang merangkai kembali dokumentasi foto bersejarah Provinsi Banten ke dalam pengalaman kuratorial modern. Melalui integrasi pemindaian kode QR pada setiap koleksi fisik, REKALA membuka akses bagi publik untuk mempelajari narasi, peristiwa, dan figur penting dalam perjalanan sejarah Banten.
+            REKALA adalah layanan arsip digital yang merangkai kembali dokumentasi foto bersejarah Provinsi Banten ke dalam pengalaman kuratorial modern — dikembangkan oleh Kelompok REKALA OJT BBPVP Serang di bawah bimbingan Dinas Perpustakaan dan Kearsipan Provinsi Banten. Melalui integrasi pemindaian kode QR pada setiap koleksi fisik, REKALA membuka akses bagi publik untuk mempelajari narasi, peristiwa, dan figur penting dalam perjalanan sejarah Banten.
           </p>
         </div>
 
