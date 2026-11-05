@@ -32,7 +32,7 @@ export function TeamMemberCard({ member, className = '' }: TeamMemberCardProps) 
             src={member.photo.src}
             alt={member.name}
             fill
-            sizes="(max-width: 640px) 33vw, (max-width: 1024px) 33vw, 250px"
+            sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 250px"
             className="object-cover object-top"
             loading="lazy"
             onError={() => setImgError(true)}

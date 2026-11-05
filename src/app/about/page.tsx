@@ -106,13 +106,14 @@ export default function AboutPage() {
             <h2 className="text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-3 text-center">
               Tim Pelaksana
             </h2>
-            <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 max-w-4xl mx-auto text-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6 max-w-4xl mx-auto">
               {TEAM_MEMBERS.map((member, index) => (
-                <TeamMemberCard
+                <div
                   key={member.id}
-                  member={member}
-                  className={index === 6 ? 'col-start-2' : ''}
-                />
+                  className={index === 6 ? 'col-span-2 sm:col-span-1 flex justify-center sm:block' : 'col-span-1'}
+                >
+                  <TeamMemberCard member={member} />
+                </div>
               ))}
             </div>
           </section>

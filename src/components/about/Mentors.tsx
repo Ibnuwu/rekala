@@ -33,7 +33,7 @@ export function MentorCard({ mentor, className = '' }: MentorCardProps) {
             src={mentor.image}
             alt={mentor.name}
             fill
-            sizes="(max-width: 640px) 33vw, (max-width: 1024px) 33vw, 250px"
+            sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 250px"
             className="object-cover object-top"
             loading="lazy"
             onError={() => setImgError(true)}
@@ -73,10 +73,17 @@ export function Mentors({ items = defaultMentors, className = '' }: MentorsSecti
         Dinas Perpustakaan dan Kearsipan Provinsi Banten &amp; BBPVP Serang
       </p>
 
-      {/* Mentor Grid: 1 clean row of 3 compact cards with responsive gaps */}
-      <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 max-w-4xl mx-auto text-center">
-        {items.map((mentor) => (
-          <MentorCard key={mentor.name} mentor={mentor} />
+      {/* Mentor Grid: 2-col mobile, 3-col desktop */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6 max-w-4xl mx-auto">
+        {items.map((mentor, index) => (
+          <div
+            key={mentor.name}
+            className={index === items.length - 1 && items.length % 2 !== 0
+              ? 'col-span-2 sm:col-span-1 flex justify-center sm:block'
+              : 'col-span-1'}
+          >
+            <MentorCard mentor={mentor} />
+          </div>
         ))}
       </div>
     </section>
