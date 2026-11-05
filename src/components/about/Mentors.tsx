@@ -46,11 +46,11 @@ export function MentorCard({ mentor, className = '' }: MentorCardProps) {
       </div>
 
       {/* Single Clean Text Group */}
-      <div className="mt-2 flex flex-col items-center">
-        <h3 className="text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-tight">
+      <div className="mt-2 flex flex-col items-center justify-start text-center px-1 h-[3.2rem] sm:h-auto">
+        <h3 className="text-[11px] sm:text-xs md:text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-tight tracking-tight line-clamp-2">
           {mentor.name}
         </h3>
-        <p className="text-[10px] sm:text-xs text-zinc-500 font-medium mt-0.5 leading-tight">
+        <p className="text-[9px] sm:text-[10px] md:text-xs text-zinc-500 font-medium leading-tight mt-0.5">
           {mentor.role}
         </p>
       </div>
@@ -74,17 +74,20 @@ export function Mentors({ items = defaultMentors, className = '' }: MentorsSecti
       </p>
 
       {/* Mentor Grid: 2-col mobile, 3-col desktop */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6 max-w-4xl mx-auto">
-        {items.map((mentor, index) => (
-          <div
-            key={mentor.name}
-            className={index === items.length - 1 && items.length % 2 !== 0
-              ? 'col-span-2 sm:col-span-1 flex justify-center sm:block'
-              : 'col-span-1'}
-          >
-            <MentorCard mentor={mentor} />
-          </div>
-        ))}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6 max-w-4xl mx-auto items-stretch">
+        {items.map((mentor, index) => {
+          const isLastOdd = index === items.length - 1 && items.length % 2 !== 0;
+          return (
+            <div
+              key={mentor.name}
+              className={isLastOdd ? 'col-span-2 sm:col-span-1 flex justify-center' : 'col-span-1'}
+            >
+              <div className={isLastOdd ? 'w-[calc(50%-0.375rem)] sm:w-full' : 'w-full'}>
+                <MentorCard mentor={mentor} />
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

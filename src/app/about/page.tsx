@@ -106,15 +106,20 @@ export default function AboutPage() {
             <h2 className="text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-3 text-center">
               Tim Pelaksana
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6 max-w-4xl mx-auto">
-              {TEAM_MEMBERS.map((member, index) => (
-                <div
-                  key={member.id}
-                  className={index === 6 ? 'col-span-2 sm:col-span-1 flex justify-center sm:block' : 'col-span-1'}
-                >
-                  <TeamMemberCard member={member} />
-                </div>
-              ))}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6 max-w-4xl mx-auto items-stretch">
+              {TEAM_MEMBERS.map((member, index) => {
+                const isLastOdd = index === 6;
+                return (
+                  <div
+                    key={member.id}
+                    className={isLastOdd ? 'col-span-2 sm:col-span-1 flex justify-center' : 'col-span-1'}
+                  >
+                    <div className={isLastOdd ? 'w-[calc(50%-0.375rem)] sm:w-full' : 'w-full'}>
+                      <TeamMemberCard member={member} />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </section>
 

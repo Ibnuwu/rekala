@@ -45,11 +45,11 @@ export function TeamMemberCard({ member, className = '' }: TeamMemberCardProps) 
       </div>
 
       {/* Single Clean Text Group */}
-      <div className="mt-2 flex flex-col items-center">
-        <h3 className="text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-tight">
+      <div className="mt-2 flex flex-col items-center justify-start text-center px-1 h-[3.2rem] sm:h-auto">
+        <h3 className="text-[11px] sm:text-xs md:text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-tight tracking-tight line-clamp-2">
           {member.name}
         </h3>
-        <p className="text-[10px] sm:text-xs text-zinc-500 font-medium mt-0.5 leading-tight">
+        <p className="text-[9px] sm:text-[10px] md:text-xs text-zinc-500 font-medium leading-tight mt-0.5">
           {member.role}
         </p>
       </div>
