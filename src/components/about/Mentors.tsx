@@ -67,7 +67,7 @@ export function Mentors({ items = defaultMentors, className = '' }: MentorsSecti
   return (
     <section className={className}>
       <h2 className="text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-100 mt-8 mb-0.5 text-center">
-        Pembimbing &amp; Pendamping OJT
+        Mentor
       </h2>
       <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-4 text-center">
         Dinas Perpustakaan dan Kearsipan Provinsi Banten &amp; BBPVP Serang

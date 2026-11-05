@@ -54,11 +54,11 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'iqbal',
     name: 'Muhammad Iqbal',
-    role: 'Observasi / Pencari Sumber',
+    role: 'Riset Observasi',
     roleCategory: 'Observasi / Sources',
     photo: {
       src: '/team/iqbal.jpg',
-      alt: 'Foto Muhammad Iqbal — Observasi / Pencari Sumber',
+      alt: 'Foto Muhammad Iqbal — Riset Observasi',
       width: 800,
       height: 1000,
     },
@@ -66,11 +66,11 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'fadilla',
     name: 'Siti Nurfadillah',
-    role: 'Observasi / Pencari Sumber',
+    role: 'Riset Observasi',
     roleCategory: 'Observasi / Sources',
     photo: {
       src: '/team/fadilla.jpg',
-      alt: 'Foto Siti Nurfadillah — Observasi / Pencari Sumber',
+      alt: 'Foto Siti Nurfadillah — Riset Observasi',
       width: 800,
       height: 1000,
     },
