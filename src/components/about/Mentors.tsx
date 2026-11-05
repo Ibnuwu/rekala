@@ -46,11 +46,11 @@ export function MentorCard({ mentor, className = '' }: MentorCardProps) {
       </div>
 
       {/* Single Clean Text Group */}
-      <div className="mt-2 flex flex-col items-center justify-start text-center px-1 h-[3.2rem] sm:h-auto">
-        <h3 className="text-[11px] sm:text-xs md:text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-tight tracking-tight line-clamp-2">
+      <div className="mt-2 flex flex-col items-center justify-start text-center w-full px-1">
+        <h3 className="text-[10px] sm:text-xs md:text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-snug tracking-tight">
           {mentor.name}
         </h3>
-        <p className="text-[9px] sm:text-[10px] md:text-xs text-zinc-500 font-medium leading-tight mt-0.5">
+        <p className="text-[8.5px] sm:text-[10px] md:text-xs text-zinc-500 font-medium leading-tight mt-0.5">
           {mentor.role}
         </p>
       </div>
