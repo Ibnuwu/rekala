@@ -24,17 +24,17 @@ export function MentorCard({ mentor, className = '' }: MentorCardProps) {
 
   return (
     <div
-      className={`flex flex-col items-center text-center bg-white dark:bg-zinc-900 rounded-xl p-2 ${className}`}
+      className={`group relative flex flex-col bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl p-2.5 sm:p-3.5 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-amber-500/40 dark:hover:border-amber-500/40 transition-all duration-300 ${className}`}
     >
-      {/* Photo Container */}
-      <div className="aspect-[3/4] w-full rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800 relative">
+      {/* Photo Box with Subtle Framing */}
+      <div className="aspect-[3/4] w-full rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 relative ring-1 ring-zinc-900/5 dark:ring-white/10">
         {!imgError ? (
           <Image
             src={mentor.image}
             alt={mentor.name}
             fill
             sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 250px"
-            className="object-cover object-top"
+            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
             onError={() => setImgError(true)}
           />
@@ -45,14 +45,14 @@ export function MentorCard({ mentor, className = '' }: MentorCardProps) {
         )}
       </div>
 
-      {/* Single Clean Text Group */}
-      <div className="mt-2 flex flex-col items-center justify-start text-center w-full px-1">
-        <h3 className="text-[10px] sm:text-xs md:text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-snug tracking-tight">
+      {/* Clean Typography + Soft Badge Role */}
+      <div className="mt-2.5 flex flex-col items-center text-center w-full px-0.5">
+        <h3 className="text-[11px] sm:text-xs md:text-sm font-bold text-zinc-900 dark:text-zinc-100 leading-snug tracking-tight group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
           {mentor.name}
         </h3>
-        <p className="text-[8.5px] sm:text-[10px] md:text-xs text-zinc-500 font-medium leading-tight mt-0.5">
+        <span className="mt-1 inline-block text-[8.5px] sm:text-[10px] md:text-xs font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-full border border-zinc-200/60 dark:border-zinc-700/50">
           {mentor.role}
-        </p>
+        </span>
       </div>
     </div>
   );
